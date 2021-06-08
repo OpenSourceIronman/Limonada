@@ -4,32 +4,42 @@ __author__ =  "Blaze Sanders"
 __email__ =   "blaze.d.a.sanders@gmail.com"
 __company__ = "Unlimited Custom Creations"
 __status__ =  "Development"
-__date__ =    "Late Updated: 2021-06-07"
+__date__ =    "Late Updated: 2021-06-08"
 __doc__ =     "Class to GET and POST data from a JSON web API"
 
-# Allow us to work with the JSON data format
+# Allow encoding and decoding of a RESTFUL JSON data format
+# https://docs.python.org/3/library/json.html
 import json
 
 # urllib3 is a powerful, sanity-friendly HTTP client for Python
 # https://urllib3.readthedocs.io/en/latest/
 import urllib3
 
-# Allow program pausing and timestamp generation for data logging
+# Allow program pausing & timestamp generation for data logging
 # https://docs.python.org/3/library/time.html
 # https://docs.python.org/3/library/datetime.html
 import time
 import datetime
 
-# Generate .txt data logging and custom terminal debugging output
-from Debug import *
+# Allow program to extract filename of the current file
+# https://docs.python.org/3/library/os.html
+import os
+
+try:
+	# Generate .txt data logging and custom terminal debugging output
+	from Debug import *
+	#TODO
+
+except ImportError:
+	thisCodesFilename = os.path.basename(__file__)
+
 
 class LimonadaAPI:
 
-	# TODO ??? CONSTANTS
+	# System architecture CONSTANTS
 	KIOSK_DEVICE_ID = 1
 
-	# CONSTANTS to manually adjust timezone project is running in, if internet not working
-	TIME_ZONE = 'PT' # or 'CT' or 'Zulu'
+	# Timezone helper CONSTANTS
 	INTERNET_TIME = 0
 	MANUAL_TIME = 1
 
@@ -73,6 +83,7 @@ class LimonadaAPI:
 	def getTime(timeSource):
 		"""
 		Get current time
+	# CONSTANTS to manually adjust timezone project is running in, if internet not working
 
 		timeSource - Select INERNET_TIME or MANUAL_TIME contnts as true time of device
 
@@ -125,6 +136,7 @@ def pythonToDjangoIndexConversion(pythonIndex):
         self.url = url
         self.httpObject = urllib3.PoolManager()
         self.credentialsDict = {}
+		self.timeZone = 'PT' # or 'CT' or 'Zulu'
 
     ###
     # Search credentialsDict (a python Dictionary) for HEX whitelisted fobIDs
