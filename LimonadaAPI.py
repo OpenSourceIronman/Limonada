@@ -5,7 +5,7 @@ __email__ =   "blaze.d.a.sanders@gmail.com"
 __company__ = "Unlimited Custom Creations"
 __status__ =  "Development"
 __date__ =    "Late Updated: 2021-06-07"
-__doc__ =     "GET and POST data from a JSON web API"
+__doc__ =     "Class to GET and POST data from a JSON web API"
 
 # Allow us to work with the JSON data format
 import json
@@ -14,100 +14,91 @@ import json
 # https://urllib3.readthedocs.io/en/latest/
 import urllib3
 
-# Allow time travel :) and timestamp generation for data logging
+# Allow program pausing and timestamp generation for data logging
 # https://docs.python.org/3/library/time.html
 # https://docs.python.org/3/library/datetime.html
 import time
 import datetime
 
-
+# Generate .txt data logging and custom terminal debugging output
 from Debug import *
 
-# Constant to toggle debug print statements ON and OFF
-DEBUG_STATEMENTS_ON = True
+class LimonadaAPI:
 
-# TODO See https://nomcon.foballthethings.org/api/accesspoints/
-KIOSK_DEVICE_ID = 1
+	# TODO ??? CONSTANTS
+	KIOSK_DEVICE_ID = 1
 
-# Constant to manually adjust timezone project is running in, if internet not working
-TIME_ZONE = 'PT' # or 'CT' or 'Zulu'
-INTERNET_TIME = 0
-MANUAL_TIME = 1
+	# CONSTANTS to manually adjust timezone project is running in, if internet not working
+	TIME_ZONE = 'PT' # or 'CT' or 'Zulu'
+	INTERNET_TIME = 0
+	MANUAL_TIME = 1
 
-# List of Device Names and ID that you can perform http.GET on
-ACCESS_POINTS_URL = 'https://nomcon.foballthethings.org/api/accesspoints/'
-# Define dictionary for parameters being sent to the ACCESS_POINTS_URL
-ACCESS_POINTS_PARAMS = {'id': 'value', 'created_date': 'value','modified_date': 'value','name': 'value', 'location': 'value', 'verb': 'value'}
-# The max number of devices hardcoded into the AccessPoint API
-MAX_NUMBER_OF_DEVICES = 8
+	# Access Point CONSTANTS
+	# List of Device Names and ID that you can perform http.GET on
+	ACCESS_POINTS_URL = 'https://nomcon.foballthethings.org/api/accesspoints/'
+	# Define dictionary for parameters being sent to the ACCESS_POINTS_URL
+	ACCESS_POINTS_PARAMS = {'id': 'value', 'created_date': 'value','modified_date': 'value','name': 'value', 'location': 'value', 'verb': 'value'}	
+	# The max number of devices hardcoded into the AccessPoint API
+	MAX_NUMBER_OF_DEVICES = 8
 
-# List of valid RFID fob UID's in hex format that you can perform http.GET on
-CREDENTIALS_URL = 'https://nomcon.foballthethings.org/api/credentials/'
-# Define dictionary for parameters being sent to the CREDENTAILS_URL
-CREDENTIALS_PARAMS = {'id': 'value', 'created_date': 'value','modified_date': 'value', 'encodedCredential': 'value'}
-# The number of IDs hardcoded into the Credentials API
-MAX_NUMBER_OF_CREDENTIALS = 503
-# This CONSTANT value is returned if credential is NOT FOUND
-CREDENTIALS_ID_NOT_FOUND = -1
+	#
+	# List of valid RFID fob UID's in hex format that you can perform http.GET on
+	CREDENTIALS_URL = 'https://nomcon.foballthethings.org/api/credentials/'
+	# Define dictionary for parameters being sent to the CREDENTAILS_URL
+	CREDENTIALS_PARAMS = {'id': 'value', 'created_date': 'value','modified_date': 'value', 'encodedCredential': 'value'}
+	# The number of IDs hardcoded into the Credentials API
+	MAX_NUMBER_OF_CREDENTIALS = 503
+	# This CONSTANT value is returned if credential is NOT FOUND
+	CREDENTIALS_ID_NOT_FOUND = -1
 
-# Location for datalog that user RFID scans that you can perform http.POST on
-DATA_LOG_URL = 'https://nomcon.foballthethings.org/api/activitylistings/'
+	# Location for datalog that user RFID scans that you can perform http.POST on
+	DATA_LOG_URL = 'https://nomcon.foballthethings.org/api/activitylistings/'
 
-# Highest level API URL
-API_ENDPOINT = 'https://nomcon.foballthethings.org/api/'
+	# Highest level API URL
+	API_ENDPOINT = 'https://nomcon.foballthethings.org/api/'
 
-# Security Key to allow POSTing to API
-API_KEY = 'Token 2e77c0656e0549e4cefadfac979ccc622b98b07f'
+	# Security Key to allow POSTing to API
+	API_KEY = 'Token 2e77c0656e0549e4cefadfac979ccc622b98b07f'
 
-# Django is uses one indexed arrays and Python uses zero index arrays
-DJANGO_PYTHON_ARRAY_OFFSET = 1
+	# Django uses one indexed arrays and Python uses zero index arrays
+	DJANGO_PYTHON_ARRAY_OFFSET = 1
 
-# Highest level JSON value definitions
-SwaggerHeaders = {  'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Allow': 'GET, POST, HEAD, OPTIONS',
-            'Authorization': 'Token 2e77c0656e0549e4cefadfac979ccc622b98b07f'}
-
-###
-# Calls standard Python 3 print("X") statement if DEBUG global variable is TRUE
-#
-# return NOTHING
-###
-def debugPrint(printMe):
-    if(DEBUG_STATEMENTS_ON):
-        #print("Database.py DEBUG STATEMENT:")
-        print(printMe)
-    else:
-        print("/n") # PRINT NEW LINE
-
-###
-# Get current time
-#
-# @timeSource - Select INERNET_TIME or MANUAL_TIME contnts as true time of device
-#
-# return String variable with time formatted in iso8601 format
-###
-def getTime(timeSource):
-    if(timeSource == INTERNET_TIME):
-        timeStamp = time.time()
-        iso8601DateTime = datetime.datetime.fromtimestamp(timeStamp).strftime('%Y-%m-%d %H:%M:%S')
-        #debugPrint("Current Time is: " + iso8601DateTime)
-        return iso8601DateTime
-    elif(timeSource == MANUAL_TIME):
-        debugPrint("TODO MANUAL TIME ZONE UPDATING")
-        #TODO timezoneOffsett = ?-7? Zulu -7 or PT +3
-        #TODO return iso8601DateTime + timeZoneOffset
-    else:
-        print("INVALID timeSource parameters sent to getTime method, please use INTERNET_TIME or MANUAL_TIME")
+	# Highest level JSON value definitions
+	SwaggerHeaders = {  	'Content-Type': 'application/json',
+            			'Accept': 'application/json',
+            			'Allow': 'GET, POST, HEAD, OPTIONS',
+            			'Authorization': 'Token 2e77c0656e0549e4cefadfac979ccc622b98b07f'}
 
 
-###
-# Convert Django ONE indexed array notation into Python ZERO indexed array notation
+	def getTime(timeSource):
+		"""
+		Get current time
+
+		timeSource - Select INERNET_TIME or MANUAL_TIME contnts as true time of device
+
+		return String variable with time formatted in iso8601 format
+		"""
+		if(timeSource == INTERNET_TIME):
+        		timeStamp = time.time()
+        		iso8601DateTime = datetime.datetime.fromtimestamp(timeStamp).strftime('%Y-%m-%d %H:%M:%S')
+			message = "Current Time is: " + iso8601DateTime
+        		Debug.Dprint(message)
+        		return iso8601DateTime
+    		elif(timeSource == MANUAL_TIME):
+        		debugPrint("TODO MANUAL TIME ZONE UPDATING")
+        		#TODO timezoneOffsett = ?-7? Zulu -7 or PT +3
+        	#TODO return iso8601DateTime + timeZoneOffset
+    		else:
+        		print("INVALID timeSource parameters sent to getTime method, please use INTERNET_TIME or MANUAL_TIME")
+
+
+	###
+	# Convert Django ONE indexed array notation into Python ZERO indexed array notation
 #
 # return interger value of expected index
 ###
-def djangoToPythonIndexConversion(djangoIndex):
-    return djangoIndex - DJANGO_PYTHON_ARRAY_OFFSET
+	def djangoToPythonIndexConversion(djangoIndex):
+    	return djangoIndex - DJANGO_PYTHON_ARRAY_OFFSET
 
 ###
 # Convert Python ZERO indexed array notation into Django ONE indexed array notation
@@ -117,7 +108,6 @@ def djangoToPythonIndexConversion(djangoIndex):
 def pythonToDjangoIndexConversion(pythonIndex):
     return pythonIndex + DJANGO_PYTHON_ARRAY_OFFSET
 
-class Database:
 
     ###
     # Constructor to initialize an Database object
