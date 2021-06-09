@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-
+"""
 __author__ =  "Blaze Sanders"
 __email__ =   "blaze.d.a.sanders@gmail.com"
 __company__ = "Unlimited Custom Creations"
 __status__ =  "Development"
 __date__ =    "Late Updated: 2021-06-08"
 __doc__ =     "Class to GET and POST data from a JSON web API"
+"""
 
 # Allow encoding and decoding of a RESTFUL JSON data format
 # https://docs.python.org/3/library/json.html
@@ -44,63 +45,64 @@ class LimonadaAPI:
 	MANUAL_TIME = 1
 
 	# Access Point CONSTANTS
-	# List of Device Names and ID that you can perform http.GET on
+	# Highest level API URL
+	API_ENDPOINT = 'https://nomcon.foballthethings.org/api/'
+	# Security Key to allow POSTing to API #TODO MOVE TO ENVIROMENT PATH FOR PRODUCTION
+	API_KEY = 'Token 2e77c0656e0549e4cefadfac979ccc622b98b07f'
+
 	ACCESS_POINTS_URL = 'https://nomcon.foballthethings.org/api/accesspoints/'
+	# List of parameters that you can perform http.GET on
 	# Define dictionary for parameters being sent to the ACCESS_POINTS_URL
 	ACCESS_POINTS_PARAMS = {'id': 'value', 'created_date': 'value','modified_date': 'value','name': 'value', 'location': 'value', 'verb': 'value'}	
 	# The max number of devices hardcoded into the AccessPoint API
 	MAX_NUMBER_OF_DEVICES = 8
+	# CONSTANT returned if access point parameters are NOT FOUND
+	PARAM_NOT_FOUND = -1
 
-	#
-	# List of valid RFID fob UID's in hex format that you can perform http.GET on
 	CREDENTIALS_URL = 'https://nomcon.foballthethings.org/api/credentials/'
 	# Define dictionary for parameters being sent to the CREDENTAILS_URL
 	CREDENTIALS_PARAMS = {'id': 'value', 'created_date': 'value','modified_date': 'value', 'encodedCredential': 'value'}
 	# The number of IDs hardcoded into the Credentials API
 	MAX_NUMBER_OF_CREDENTIALS = 503
-	# This CONSTANT value is returned if credential is NOT FOUND
-	CREDENTIALS_ID_NOT_FOUND = -1
+	# CONSTANT returned if credentials are NOT FOUND
+	CREDENTIAL_NOT_FOUND = -1
 
-	# Location for datalog that user RFID scans that you can perform http.POST on
+	# Location you can perform http.POST on
 	DATA_LOG_URL = 'https://nomcon.foballthethings.org/api/activitylistings/'
-
-	# Highest level API URL
-	API_ENDPOINT = 'https://nomcon.foballthethings.org/api/'
-
-	# Security Key to allow POSTing to API
-	API_KEY = 'Token 2e77c0656e0549e4cefadfac979ccc622b98b07f'
 
 	# Django uses one indexed arrays and Python uses zero index arrays
 	DJANGO_PYTHON_ARRAY_OFFSET = 1
 
 	# Highest level JSON value definitions
-	SwaggerHeaders = {  	'Content-Type': 'application/json',
+	SwaggerHeaders = {  'Content-Type': 'application/json',
             			'Accept': 'application/json',
             			'Allow': 'GET, POST, HEAD, OPTIONS',
             			'Authorization': 'Token 2e77c0656e0549e4cefadfac979ccc622b98b07f'}
 
 
-	def getTime(timeSource):
+	def getTime(self, timeSource):
 		"""
 		Get current time
-	# CONSTANTS to manually adjust timezone project is running in, if internet not working
+		adjust timezone project is running in, if internet not working
 
-		timeSource - Select INERNET_TIME or MANUAL_TIME contnts as true time of device
+		Key arguments:
+		self -- #TODO
+		timeSource -- INTERNET_TIME
 
-		return String variable with time formatted in iso8601 format
+		Return:
+		String variable with time formatted in iso8601 format
 		"""
+
 		if(timeSource == INTERNET_TIME):
-        		timeStamp = time.time()
-        		iso8601DateTime = datetime.datetime.fromtimestamp(timeStamp).strftime('%Y-%m-%d %H:%M:%S')
+			timeStamp = time.time()
+			iso8601DateTime = datetime.datetime.fromtimestamp(timeStamp).strftime('%Y-%m-%d %H:%M:%S')
 			message = "Current Time is: " + iso8601DateTime
-        		Debug.Dprint(message)
-        		return iso8601DateTime
-    		elif(timeSource == MANUAL_TIME):
-        		debugPrint("TODO MANUAL TIME ZONE UPDATING")
-        		#TODO timezoneOffsett = ?-7? Zulu -7 or PT +3
-        	#TODO return iso8601DateTime + timeZoneOffset
-    		else:
-        		print("INVALID timeSource parameters sent to getTime method, please use INTERNET_TIME or MANUAL_TIME")
+			Debug.Dprint(message)
+			return iso8601DateTime
+    	else(timeSource == MANUAL_TIME):
+    		debugPrint("TODO MANUAL TIME ZONE UPDATING")
+    		#TODO timezoneOffsett = ?-7? Zulu -7 or PT +3
+    		#TODO return iso8601DateTime + timeZoneOffset
 
 
 	###
