@@ -4,7 +4,7 @@ __author__  =  "Blaze Sanders"
 __email__   =  "blaze.d.a.sanders@gmail.com"
 __company__ =  "Unlimited Custom Creations"
 __status__  =  "Development"
-__date__    =  "Late Updated: 2021-06-08"
+__date__    =  "Late Updated: 2021-06-09"
 __doc__     =  "Class to utlize AWS Polly for voice generation "
 """
 
@@ -44,9 +44,14 @@ class Speak:
 	BAD_ACCENT_TEXT = ""
 
 	# English Voice CONTANTS
-
+	STATE_0_TEXT = ""
 	BAD_ACCENT_TEXT = "Close but its pronouced lee-me-nod-da"
 
+
+	WORKING_TEXT = "We will have your drink in just a few seconds."
+	COUNTDOWN_TEXT = "5, 4, 3, 2, 1"
+	PRODUCT_DISPENSE_TEXT = "Here is your Limonada, enjoy!"
+	STATE_10_TEXT = ""
 
 
 	def __init__(self, text, voiceId):
