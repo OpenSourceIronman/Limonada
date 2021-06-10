@@ -29,3 +29,23 @@ Commit message standard shall follow https://www.conventionalcommits.org/en/v1.0
 All documentation is self generated using https://www.python.org/dev/peps/pep-0257/
 See examples and usage at https://docutils.sourceforge.io/README.html#quick-start
 Static type checking was done using http://mypy-lang.org/
+
+
+UI
+**Run:**
+Running on PI/linux connected to Touch control UI screen with Audio
+
+**PYQT:**
+1.Kiosk Based App running on Pi USING qt5 framewrok, can easily be installed on the PI
+
+Interaction with Hardware can be done via python file. 
+
+So, UI will be sending controlling commands to the HARDWARE through the python files.
+
+As project evolve it make more sense and this document will be updated.
+
+**INSTALL:**
+sudo apt-get install qttools5-dev-tools
+pip install pyqt5-tools
+sudo dnf install qt5-designer  
+
