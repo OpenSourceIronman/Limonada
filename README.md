@@ -17,6 +17,7 @@ Where the ? in sd? can be determined by using the "lsblk" command to find your m
 
 Raspberry Pi uses the following libraries: <br>
 pip3 install RPi.GPIO <br>
+pip3 install pyautogui <br>
 pip install python-statemachine <br>
 sudo apt-get install qttools5-dev-tools <br>
 pip install pyqt5-tools <br>
