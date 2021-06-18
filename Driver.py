@@ -8,6 +8,17 @@ __date__    =  "Late Updated: 2021-06-14"
 __doc__     =  "Logic to run back-end services via state changes in GUI"
 """
 
+# TODO ONLY IF MEDIA COMPUTER IS NOT USED
+# Connect microphone to Raspberry Pi
+# https://pimylifeup.com/raspberrypi-microphone/
+# Connect camera to Raspberry Pi
+# https://www.hackster.io/shahizat005/getting-started-with-raspberry-pi-camera-8eec28
+# https://www.e-consystems.com/4k-usb-camera.asp
+# Allow control of mouse & keyboard to start Zoom app and meeting
+# https://pyautogui.readthedocs.io/en/latest/
+import pyautogui
+
+
 # Allow program to extract filename of the current file and exit gracefully
 # https://docs.python.org/3/library/os.html
 import os
@@ -26,10 +37,6 @@ import time
 # Allow the control on high power relay shield
 # https://www.amazon.com/KEYESTUDIO-4-Channel-Shield-Expansion-Raspberry/dp/B072XGF4Z3
 import RPi.GPIO as GPIO
-
-# Allow control of mouse & keyboard to start Zoom app and meeting
-# https://pyautogui.readthedocs.io/en/latest/
-import pyautogui
 
 # Allow creation of temporary directory to save harddrive space
 # https://docs.python.org/3/library/tempfile.html
@@ -65,7 +72,10 @@ DEBUG_STATEMENTS_ON = True
 THIS_CODES_FILENAME = os.path.basename(__file__)
 
 # Zoom Vidoe & Audio CONSTANTS
-MISSION_CONTROL_ZOOM_URL = ""
+MISSION_CONTROL_ZOOM_URL = "https://us04web.zoom.us/j/2770448765?pwd=MUVJWGZUelJHMmNuYW4xL0hndjdHQT09"
+MISSION_CONTROL_MEETING_ID = 2770448765
+MISSION_CONTROL_ZOOM_PASSCODE = 8ND3ae
+
 
 class Driver(object):
 
@@ -73,7 +83,7 @@ class Driver(object):
 		self.state = state
 
 	def unitTest():
-		print("Starting Driver.py Unit Test")
+		print("Starting Limonada Driver.py Unit Test")
 
 
 	def launchGUI(framework):
@@ -196,25 +206,10 @@ class Driver(object):
 		time.pause(3)
 
 
-	def takeWFOVpicture():
-		"""
-		"""
-		img = ComputerVision.ScanQRcode(CAM2)
-
-
-	def scanID():
-		"""
-		"""
-		#Tapmotic - v2020.0/ComputerVision directory?
-		img = ComputerVision.ScanQRcode(CAM2)
-
-
 if __name__ == "_main_":
 
 	# Hardware back-end driver that launches GUI front-end
 	# TODO @Murali - OF DOES GUI front-end driver call into back-end?
-
-	print("CODE STARTS RUNNING HERE")
 
 	# Rotate screen into portrait mode
 	# https://www.raspberrypi.org/forums/viewtopic.php?t=212008
