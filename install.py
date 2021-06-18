@@ -95,6 +95,9 @@ if __name__ == "__main__":
 
 	if(hardware == PI_4):
 
+		# QTPY is the GUI layer for Limonada
+		check_call("pip3 install QtPy", shell=True)
+
 		# Allow Python code to interface via SDK to AWS services like S3, Polly, Lex, and EC2
 		# https://pypi.org/project/boto3/
 		check_call("pip3 install boto3", shell=True)
