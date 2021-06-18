@@ -12,9 +12,11 @@ __doc__     =  "Process flow state machine for hardware & GUI syncing"
 # https://pypi.org/project/python-statemachine/
 from statemachine import StateMachine, State
 
+from myModel import *
+
 class LimonadaStateMachine(StateMachine):
 
-	# Lucid diagram for Limonada State Machine
+	# Control for branching Limonada state machine defined at:
 	# https://lucid.app/lucidchart/a8d9b1e9-b963-4709-b8cf-a47e7ee67a6e/edit?beaconFlowId=3D4DF78ED9E6E012&page=0_0#
 
 	# Custom portrait mode boot (aka splash) screen
@@ -37,7 +39,39 @@ class LimonadaStateMachine(StateMachine):
 	vendScreen = State('4')
 	endScreen = State('5')
 
-
 	Desktop_To_Zoom = piDesktopScreen.to(zoomScreen)
 	Zoom_To_AppHomeScreen = zoomScreen.to(qtpyHomeScreen)
 
+	def __init__(self):
+		"""
+		Constructor to initialize an LimonadaStateMachine object
+		Defaults currentState to piBootScreen
+
+		Key arguments:
+		self -- Newly created LimonadaStateMachine object
+		currentState -- INTERGER: Current state that GUI is in
+		nextState -- INTERGER:  State that GUI would like driver.py
+
+		Return:
+		New LimonadaStateMachine() object
+		"""
+
+		self.currentState = '-2'
+		self.nextState = '-1'
+
+	def unitTest():
+		print("Starting LimonadaStateMachine.py unit test")
+
+		obj = myModel(state='-2')
+		kiosk = LimonadaStateMachine(obj)
+		kiosk.Desktop_To_Zoom()
+
+
+if __name__ == "__main__":
+	print("Starting LimonadaStateMachine.py main")
+	LimonadaStateMachine.unitTest()
+
+
+class myModel:
+	def __init__(self, state):
+		self.state = state
