@@ -113,13 +113,13 @@ class Driver(object):
 
 	def vend(productID):
 		"""
-    	#TODO
+    		#TODO
 
-    	Key argument(s):
-   		productID -- INTERGER: Unique ID for each type on Limonada can flavor
+    		Key argument(s):
+   			productID -- INTERGER: Unique ID for each type of item inside kiosk
 
-    	Return:
-    	True if ALL the steps to vend a can where successfull; False otherwise
+    		Return:
+    		True if ALL the steps to vend a can where successfull; False otherwise
 		"""
 		successfulVend = False
 
