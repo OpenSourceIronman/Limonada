@@ -4,7 +4,7 @@ __author__  =  "Blaze Sanders"
 __email__   =  "blaze.d.a.sanders@gmail.com"
 __company__ =  "Unlimited Custom Creations"
 __status__  =  "Development"
-__date__    =  "Late Updated: 2021-06-14"
+__date__    =  "Late Updated: 2021-06-20"
 __doc__     =  "Logic to run back-end services via state changes in GUI"
 """
 
@@ -14,10 +14,10 @@ __doc__     =  "Logic to run back-end services via state changes in GUI"
 # Connect camera to Raspberry Pi
 # https://www.hackster.io/shahizat005/getting-started-with-raspberry-pi-camera-8eec28
 # https://www.e-consystems.com/4k-usb-camera.asp
+
 # Allow control of mouse & keyboard to start Zoom app and meeting
 # https://pyautogui.readthedocs.io/en/latest/
 import pyautogui
-
 
 # Allow program to extract filename of the current file and exit gracefully
 # https://docs.python.org/3/library/os.html
@@ -34,10 +34,6 @@ from subprocess import check_call
 # https://docs.python.org/3/library/time.html
 import time
 
-# Allow the control on high power relay shield
-# https://www.amazon.com/KEYESTUDIO-4-Channel-Shield-Expansion-Raspberry/dp/B072XGF4Z3
-import RPi.GPIO as GPIO
-
 # Allow creation of temporary directory to save harddrive space
 # https://docs.python.org/3/library/tempfile.html
 from tempfile import gettempdir
@@ -45,41 +41,59 @@ from tempfile import gettempdir
 # Allow Driver.py to follow the hardware state machine based off GUI process flow
 from LimonadaStateMachine import *
 
-# Relay Shied Pin CONSTANTS
-SHIELD_PIN_1 = 7
-SHIELD_PIN_2 = 15
-SHIELD_PIN_3 = 31
-SHIELD_PIN_4 = 37
+# Generate .txt data logging and custom terminal debugging output
+from Debug import *
 
-# Timing pauses in units of seconds
-VEND_DELAY_IN_SEC = 3
-SENSE_DELAY_IN_SEC = 1
-
-# ProductID vending CONSTANTS
-CANNED_DRINK = 0
-GIFT_CARD_IN_CAN = 1
-
-# GUI framework CONSTANTS
-FLASK = 0
-QTPY = 1
-
-# Function return and debugging helper CONSTANTS
-OK = 1
-NOT_OK = 0
-HIGH = 1
-LOW = 0
-DEBUG_STATEMENTS_ON = True
-THIS_CODES_FILENAME = os.path.basename(__file__)
-
-# Zoom Vidoe & Audio CONSTANTS
-MISSION_CONTROL_ZOOM_URL = "https://us04web.zoom.us/j/2770448765?pwd=MUVJWGZUelJHMmNuYW4xL0hndjdHQT09"
-MISSION_CONTROL_MEETING_ID = 2770448765
-MISSION_CONTROL_ZOOM_PASSCODE = 8ND3ae
+# If code is running on Raspberry Pi 3+ or higher hardware, the TRY block will run
+# Otherwise input & output pins will be simulated since code is running a Mac or Linux PC (Do NOT use Windows)
+# https://raspberrypi.stackexchange.com/questions/34119/gpio-library-on-windows-while-developing
+try:
+	# Allow the control on high power relay shield
+	# https://www.amazon.com/KEYESTUDIO-4-Channel-Shield-Expansion-Raspberry/dp/B072XGF4Z3
+	import RPi.GPIO as GPIO
+except RuntimeError:
+	#TODO Currently using local folder named RPi with files __init__.py and GPIO.py to trick import
+	import GPIOSimulator as GPIO
 
 
 class Driver(object):
 
+	# Relay Shied Pin CONSTANTS
+	SHIELD_PIN_1 = 7
+	SHIELD_PIN_2 = 15
+	SHIELD_PIN_3 = 31
+	SHIELD_PIN_4 = 37
+
+	# Timing pauses in units of seconds
+	VEND_DELAY_IN_SEC = 3
+	SENSE_DELAY_IN_SEC = 1
+
+	# ProductID vending CONSTANTS
+	CANNED_DRINK = 0
+	GIFT_CARD_IN_CAN = 1
+
+	# GUI framework CONSTANTS
+	FLASK = 0
+	QTPY = 1
+
+	# Function return and debugging helper CONSTANTS
+	OK = 1
+	NOT_OK = 0
+	HIGH = 1
+	LOW = 0
+	DEBUG_STATEMENTS_ON = True
+	THIS_CODES_FILENAME = os.path.basename(__file__)
+
+	# Zoom Vidoe & Audio CONSTANTS
+	MISSION_CONTROL_ZOOM_URL = "https://us04web.zoom.us/j/2770448765?pwd=MUVJWGZUelJHMmNuYW4xL0hndjdHQT09"
+	ZOOM_MEETING_ID = 2770448765
+	ZOOM_PASSCODE = "8ND3ae"
+
+
 	def __init__(self, state):
+		"""
+		#TODO Only need this if using python-statemachine library
+		"""
 		self.state = state
 
 	def unitTest():
@@ -206,7 +220,14 @@ class Driver(object):
 		time.pause(3)
 
 
-if __name__ == "_main_":
+if __name__ == "__main__":
+
+	currentProgramFilename = os.path.basename(__file__)
+	DebugObject = Debug(Driver.DEBUG_STATEMENTS_ON, currentProgramFilename)
+	DebugObject.Dprint("Starting  Driver.py main()")
+
+	if(Driver.DEBUG_STATEMENTS_ON):
+		Driver.unitTest()
 
 	# Hardware back-end driver that launches GUI front-end
 	# TODO @Murali - OF DOES GUI front-end driver call into back-end?

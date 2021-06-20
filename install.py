@@ -119,6 +119,9 @@ if __name__ == "__main__":
 		# Install simple command line TODO .MP3 or .WAV audio player
 		check_call("sudo apt install sox", shell=True) # CLI command is "play file.wav"
 
+		# https://raspberrypi.stackexchange.com/questions/34119/gpio-library-on-windows-while-developing
+		# pip install GPIOSimulator + import GPIOSimulator as GPIO
+
 	else:
 		print("INVALID CLI ARGUMENTS: 'python3 install -d LinuxPC' is valid for example")
 
