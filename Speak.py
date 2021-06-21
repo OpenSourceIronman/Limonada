@@ -33,7 +33,6 @@ import subprocess
 from subprocess import Popen, PIPE
 from subprocess import check_call
 
-
 # Allow creation of temporary directory to save harddrive space
 # https://docs.python.org/3/library/tempfile.html
 from tempfile import gettempdir
@@ -41,8 +40,14 @@ from tempfile import gettempdir
 # Allow 'dependency-free' playback of .wav audio on Linux, MacOS, &> 17 # https://simpleaudio.readthedocs.io/en/latest/
 import simpleaudio as sa
 
+# Allow the control of the space-time fabric :)
+# Allow pausing of code so that programmers can read terminal output
+# https://docs.python.org/3/library/time.html
+import time
 
+# Generate .txt data logging and custom terminal debugging output
 from Debug import *
+
 
 class Speak:
 
@@ -70,16 +75,17 @@ class Speak:
 	NULL = -1
 	SOX = 0
 	AWS = 1
+	SIMPLE_AUDIO
 	STATE_0_TEXT = ""
 	STATE_9_TEXT = ""
 
 
 	def unitTest():
 
-		TestObject1 = Speak(Speak.ENG_SCENE_1, Speak.SOX)
-		TestObject1.say(Speak.ENG_SCENE_3)
+		TestObject1 = Speak(Speak.ENG_SCENE_2, Speak.SIMPLE_AUDIO)
+		TestObject1.say()
 
-		time.pause(3)
+		time.sleep(3)
 
 	def __init__(self, text, voiceId):
 		"""
@@ -124,20 +130,31 @@ class Speak:
 		}
 
 		self.soundId = self.voiceRepliesDict[text]
+		pathEnding = "./Audio/" + text
+		#REMOVE print("Fullpath = ", fullpath)
+		#REMOVE self.filePath = os.path.basename(fullpath)
+		#print("filePath = ", self.filePath)
+		#WORKS self.SoundObject = sa.WaveObject.from_wave_file("./EnglishReplyToScene1.wav")
+		self.SoundObject = sa.WaveObject.from_wave_file(pathEnding)
+		self.DebugObject.Dprint("Audio clip found in dictionary")
 
-	def say(self, filename):
+
+	def say(self):
 		"""
 		"""
-		check_call("cd Audio", shell=True)
-		check_call("play EnglishReplayToScene1.wav", shell=True)
+		playObj = self.SoundObject.play()
+		playObj.wait_done()
 
-		sox_message = "play ./Audio/" + filename
-		print(sox_message)
+		#check_call("cd Audio", shell=True)
+		#check_call("play EnglishReplayToScene1.wav", shell=True)
 
-		test = 'play ./Audio/EnglishReplayToScene2.wav'
+		#sox_message = "play ./Audio/" + filename
+		#print(sox_message)
 
-		check_call(test, shell=True)
-		check_call(sox_message, shell=True)
+		#test = 'play ./Audio/EnglishReplayToScene2.wav'
+
+		#check_call(test, shell=True)
+		#check_call(sox_message, shell=True)
 
 
 if __name__ == "__main__":
