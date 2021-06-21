@@ -1,0 +1,60 @@
+<!--
+ * @file complete.html
+ * @author Blaze Sanders Robotic Beverage Technologies Inc
+ * @date 2020-02-19
+ * @link https://aryaboudaie.com/python/technical/educational/web/flask/2018/10/17/flask.html
+ * @version 0.0
+ *
+ * @brief HTML code to render final screen for the CoCoTaps food service system
+ *	
+ * @section DESCRIPTION
+ *
+ * Brand colors: 
+ * Dark Green (0x086D38), Light Green (0x86C042), 
+ * Apple White (0xFDFDFD), White (0xFFFFFF),
+ * Apple Black (0x010306), Logo Black (0x2A3627)
+ * 
+ * <center><img src="{{ url_for('static', filename='images/CoCoTapsLogoV0.png') }}" width="864" height="402" alt="CoCoTaps Logo"> </center>
+ -->
+<html lang="en">
+  <head>
+    <title> Tapping complete enjoy </title>
+
+    <!--TODO CSS STUFF HERE-->
+    <!-- custom styles -->
+    <link rel="stylesheet" href="./static/assets/styles/main.css">
+  </head>
+
+  <body>
+    <!--TODO: FIX SCRIPT TO ALLOW USE OF ARRAYS-->
+    <script language ="JavaScript">
+ 	  var drinkID = new Array();
+	  drinkID[0] = RumCoConut;
+	  var fontSize = 60;
+    </script>
+    <main>
+        <div class="container flex-column flex-container justify-space-between">
+            <div class="text-center">
+                <img class="tap-your-thirst-img" src="../static/images/short-cut-top.png" alt="coco taps logo">
+            </div>
+            <div class="text-center">
+                <h1 class="final-text">Time to Tap your Thirst</h1>
+            </div>
+            <div class="flex-container justify-center">
+                <div class="cursor-pointer flex-container flex-column align-center">
+                    <h1 class="final-text">Come back to cut top off</h1>
+                    <img class="down-arrow" src="../static/images/stretched-down-arrow.png" alt="down arrow">
+                    <img class="down-arrow" src="../static/images/stretched-down-arrow.png" alt="down arrow">
+                    <img class="down-arrow" src="../static/images/stretched-down-arrow.png" alt="down arrow">
+                </div>
+            </div>
+            <div>
+                <a href="{{ url_for('WelcomeScreen', userselection='Welcome') }}", method="GET" >
+                      <p>Home</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+  </body>
+</html>

@@ -2,6 +2,10 @@
 Limonada Smart Vending Machine Back End Python
 
 
+IP address for JMAR Raspberry Pi on ethernet is 192.168.1.60
+IP address for UCC Raspberry Pi on Wifi 76Spectrum5G in shop is 192.168.0.30 
+
+
 This Git repo holds code for many open source libraries. It's broken down into the following directories (TODO)
 
 The code was written on and designed to run on the TODO Linux Distro on a Raspberry Pi 4
@@ -16,19 +20,23 @@ Where the ? in sd? can be determined by using the "lsblk" command to find your m
 
 
 Raspberry Pi uses the following libraries: <br>
+pip3 install simpleaudio <br>
 pip3 install RPi.GPIO <br>
 pip3 install pyautogui <br>
+pip3 install flask <br>
+
+We might use the following libraries: <br>
 pip install python-statemachine <br>
 sudo apt-get install qttools5-dev-tools <br>
 pip install pyqt5-tools <br>
 sudo dnf install qt5-designer <br>
 
 
-We may use the following libraries if robotic voices & a Flutter API is needed> <br>
+We may use the following libraries if robotic voices & a Flutter API is needed for v2 <br>
 pip3 install boto3 <br>
 pip3 install  <br>
-pip3 install contextlib2
-pip3 install urllibs
+pip3 install contextlib2 <br>
+pip3 install urllibs <br>
                                   
                                        
 A DRAFT state machine can be found at: <br>
