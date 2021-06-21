@@ -237,14 +237,13 @@ if __name__ == "__main__":
 	check_call("xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate right --output DP-1 --off", shell=True)
 
 
-	driverObj = Driver(state='-2')
-	kiosk =  LimonadaStateMachine(driverObj)
-	print("Boot Screen is STATE /#")
-	print(driverObj.state)
+	modelObj = Driver(state='-2')
+	kiosk =  LimonadaStateMachine() #(modelObj)
+	print("Boot Screen is STATE =", modelObj.state)
 
 	kiosk.Desktop_To_Zoom()
-	print("Zoom Screen is STATE /#")
-	print(driverObj.state)
+	print("Zoom Screen is STATE =", modelObj.state)
+
 
 	kiosk.Zoom_To_AppHomeScreen()
 	lauchGUI(QTPY)
