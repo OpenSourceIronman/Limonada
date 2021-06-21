@@ -4,8 +4,8 @@ __author__  =  "Blaze Sanders"
 __email__   =  "blaze.d.a.sanders@gmail.com"
 __company__ =  "Unlimited Custom Creations"
 __status__  =  "Development"
-__date__    =  "Late Updated: 2021-06-19"
-__doc__     =  "Class to utlize sox and AWS Polly for voice generation "
+__date__    =  "Late Updated: 2021-06-21"
+__doc__     =  "Class to utlize simple audio and AWS Polly for voice generation "
 """
 
 # sudo apt install sox
@@ -66,8 +66,42 @@ class Speak:
 	ENG_SCENE_5 = "EnglishReplyToScene5.wav"
 
 	#TODO  Use Google Translate OR human translator to convert engligh text below
-	ENG_BAD_ACCENT_TEXT = "Close but its pronouced lee-me-nod-da"
-	SPAN_BAD_ACCENT_TEXT = ""
+	ENG_BAD_ACCENT_TEXT = "You think thats spanish, no way TODO Joseph one more time. "
+	SPAN_BAD_ACCENT_TEXT = "TODO"
+
+	ENG_SPAN_TRY_AGAIN_TEXT = "Nope, try again por favor."
+	ENG_TRY_AGAIN_TEXT = "Nope, try again"
+	SPAN_TRY_AGAIN_TEXT = "TODO"
+
+	SPAN_ENG_ANOTHER_TRY = "TODO, come on give it another try."
+	ENG_ANOTHER_TRY = "come on give it another try."
+	SPAN_ANOTHER_TRY = "TODO"
+
+	SPAN_ENG_TRUE_MEXICAN_DRINK = "TODO!TODO. For a Spanish speaker a true Mexican drink."
+	ENG_TRUE_MEXICAN_DRINK = "For a Spanish speaker a true Mexican drink."
+	SPAN_TRUE_MEXICAN_DRINK = "TODO"
+
+	SPAN_ENG_YOU_DESERVE = "TODO. You deserve a Corona lee ma nod da. Salut!"
+	ENG_YOU_DESERVE = "You deserve a Corona Limonada"
+	SPAN_YOU_DESERVE_PART_1 = "TODO"
+	SPAN_YOU_DESERVE_PART_2 = "TODO"
+
+	ENG_COME_ON = "Come on! Show me you know more than nachos in Spanish, try again."
+	SPAN_COME_ON = "TODO"
+
+	ENG_SPAN_NOPE = "Nope, but TODO"
+	ENG_NOPE = "Nope, but"
+	SPAN_NOPE = "TODO"
+
+	ENG_HERE_IS_LIMONADA = "No TODO here is a Corona Limonada for you."
+
+	ENG_SORRY_HERE_IS_DUOLINGO = "Sorry, but that is TODO for you. TODO here take a DuoLingo subscription for you to improve."
+
+	SPAN_ENG_HEY_DUOLINGO "TODO. Hey you just got a DuoLingo subscription to learn Spanish."
+	SPAN_HEY_DUOLINGO = "TODO"
+	ENG_HEY_DUOLINGO "Hey you just got a DuoLingo subscription to learn Spanish."
+
+
 	WORKING_TEXT = "We will have your drink in just a few seconds."
 	COUNTDOWN_TEXT = "5, 4, 3, 2, 1"
 	PRODUCT_DISPENSE_TEXT = "Here is your Limonada, enjoy!"
