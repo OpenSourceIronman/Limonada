@@ -66,8 +66,8 @@ class Speak:
 	ENG_SCENE_5 = "EnglishReplyToScene5.wav"
 
 	#TODO  Use Google Translate OR human translator to convert engligh text below
-	ENG_BAD_ACCENT_TEXT = "You think thats spanish, no way TODO Joseph one more time. "
-	SPAN_BAD_ACCENT_TEXT = "TODO"
+	ENG_ONE_MORE_TIME_TEXT = "You think thats Spanish, no way TODO Joseph one more time. "
+	SPAN_ONE_MORE_TIME_TEXT = "TODO"
 
 	ENG_SPAN_TRY_AGAIN_TEXT = "Nope, try again por favor."
 	ENG_TRY_AGAIN_TEXT = "Nope, try again"
@@ -93,7 +93,7 @@ class Speak:
 	ENG_NOPE = "Nope, but"
 	SPAN_NOPE = "TODO"
 
-	ENG_HERE_IS_LIMONADA = "No TODO here is a Corona Limonada for you."
+	ENG_NO_ACCENT_HERE_IS_LIMONADA = "No TODO here is a Corona Limonada for you."
 
 	ENG_SORRY_HERE_IS_DUOLINGO = "Sorry, but that is TODO for you. TODO here take a DuoLingo subscription for you to improve."
 
