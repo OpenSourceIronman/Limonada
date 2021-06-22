@@ -4,7 +4,7 @@ __author__  =  "Blaze Sanders"
 __email__   =  "blaze.d.a.sanders@gmail.com"
 __company__ =  "Unlimited Custom Creations"
 __status__  =  "Development"
-__date__    =  "Late Updated: 2021-06-20"
+__date__    =  "Late Updated: 2021-06-21"
 __doc__     =  "Logic to run back-end services via state changes in GUI"
 """
 
@@ -17,7 +17,7 @@ __doc__     =  "Logic to run back-end services via state changes in GUI"
 
 # Allow control of mouse & keyboard to start Zoom app and meeting
 # https://pyautogui.readthedocs.io/en/latest/
-import pyautogui
+# STILL NEEDED IF ZOOM IS ON MAC MINI? import pyautogui
 
 # Allow program to extract filename of the current file and exit gracefully
 # https://docs.python.org/3/library/os.html
@@ -39,7 +39,7 @@ import time
 from tempfile import gettempdir
 
 # Allow Driver.py to follow the hardware state machine based off GUI process flow
-from LimonadaStateMachine import *
+# TODO FUTURE WORD from LimonadaStateMachine import *
 
 # Generate .txt data logging and custom terminal debugging output
 from Debug import *
@@ -50,6 +50,7 @@ from Debug import *
 try:
 	# Allow the control on high power relay shield
 	# https://www.amazon.com/KEYESTUDIO-4-Channel-Shield-Expansion-Raspberry/dp/B072XGF4Z3
+	# https://raspi.tv/2013/rpi-gpio-basics-5-setting-up-and-using-outputs-with-rpi-gpio
 	import RPi.GPIO as GPIO
 except RuntimeError:
 	#TODO Currently using local folder named RPi with files __init__.py and GPIO.py to trick import
@@ -75,6 +76,7 @@ class Driver(object):
 	# GUI framework CONSTANTS
 	FLASK = 0
 	QTPY = 1
+	VEND4YOU = 2
 
 	# Function return and debugging helper CONSTANTS
 	OK = 1
@@ -99,6 +101,22 @@ class Driver(object):
 	def unitTest():
 		print("Starting Limonada Driver.py Unit Test")
 
+		# Rotate screen into portrait mode
+		# https://www.raspberrypi.org/forums/viewtopic.php?t=212008
+		check_call("xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate right --output DP-1 --off", shell=True)
+
+
+		modelObj = Driver(state='-2')
+		kiosk =  LimonadaStateMachine() #(modelObj)
+		print("Boot Screen is STATE =", modelObj.state)
+
+		kiosk.Desktop_To_Zoom()
+		print("Zoom Screen is STATE =", modelObj.state)
+
+
+		kiosk.Zoom_To_AppHomeScreen()
+		lauchGUI(QTPY)
+
 
 	def launchGUI(framework):
 		"""
@@ -111,7 +129,9 @@ class Driver(object):
     	OK if GUI was launched succesfully, and NOT_OK otherwise
 		"""
 
-		if(framework == FLASK):
+		if(framework == VEND4YOU):
+			print("CMS")
+		elif(framework == FLASK):
 			Debug.Dprint("GUI generated using Flask microframework")
 			#TODO Launch GUI.py on 2nd Pi or 2nd thread
 			return OK
@@ -124,17 +144,57 @@ class Driver(object):
 
 		return NOT_OK
 
+	def switchHDMIto(portNumber):
+		"""
+		TODO
+		# https://raspberrypi.stackexchange.com/questions/99823/rpi-uart-control-ir-remote-hdmi-switch-problem
+
+		BOM TO PURCHASE
+		IR LED 5mm (940nm) - TSAL6200
+		IR Receiver Module (3.3V type) - TSOP38238
+		2N2222 NPN transistor
+		36 Ohm 1/4W Resistor
+		680 Ohm 1/4W Resistor
+		10K Ohm 1/4W Resistor
+
+		Key argument(s):
+		portNumber -- INTERGER: HDMI input to use to driver ouput on HDMI switcher ASIN: B0739GSKV2
+		https://www.amazon.com/dp/B0739GSKV2/?coliid=I1G5FSDF5QEW1I&colid=1YXO1OO36TF2L&psc=1&ref_=lv_ov_lig_dp_it
+
+		Return:
+		True if ALL the steps to switch HMDI input where successfull; False otherwise
+		"""
+
+		successfullSwitch = False
+
+		if(portNumber == 1):
+			portPin = BCM1
+			successfullSwitch = True
+		elif(portNumber == 2):
+			portPin = BCM1
+			successfullSwitch = True
+		else:
+			DebugObject = Debug(DEBUG_STATEMENTS_ON, THIS_CODES_FILENAME)
+			DebugObject.Dprint("INVALID HDMI port number passed as parameter to Driver.switchHDMIto()")
+
+		GPIO.cleanup()
+		GPIO.setup(portPin, GPIO.OUT, initial=GPIO.LOW)
+		GPIO.output(portPin, HIGH)
+
+		return successfullSwitch
+
 
 	def vend(productID):
 		"""
-    		#TODO
+		#TODO
 
-    		Key argument(s):
-   			productID -- INTERGER: Unique ID for each type of item inside kiosk
+		Key argument(s):
+		productID -- INTERGER: Unique ID for each type of item inside kiosk
 
-    		Return:
-    		True if ALL the steps to vend a can where successfull; False otherwise
+		Return:
+		True if ALL the steps to vend a can where successfull; False otherwise
 		"""
+
 		successfulVend = False
 
 		if(productID == CANNED_DRINK):
@@ -145,6 +205,7 @@ class Driver(object):
 			DebugObject = Debug(DEBUG_STATEMENTS_ON, THIS_CODES_FILENAME)
 			DebugObject.Dprint("INVALID productID passed as parameter to Driver.vend()")
 
+		GPIO.cleanup()
 		GPIO.setup(vendPin, GPIO.OUT, initial=GPIO.LOW)
 		GPIO.output(vendPin, HIGH)
 		time.pause(VEND_DELAY_IN_SEC)
@@ -226,46 +287,37 @@ if __name__ == "__main__":
 	DebugObject = Debug(Driver.DEBUG_STATEMENTS_ON, currentProgramFilename)
 	DebugObject.Dprint("Starting  Driver.py main()")
 
-	if(Driver.DEBUG_STATEMENTS_ON):
-		Driver.unitTest()
+	GPIO.setmode(GPIO.BOARD)
 
+	if(Driver.DEBUG_STATEMENTS_ON):
+		#Driver.unitTest()
+		print("Uncomment unitTest()?")
 	# Hardware back-end driver that launches GUI front-end
 	# TODO @Murali - OF DOES GUI front-end driver call into back-end?
 
-	# Rotate screen into portrait mode
-	# https://www.raspberrypi.org/forums/viewtopic.php?t=212008
-	check_call("xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate right --output DP-1 --off", shell=True)
-
-
-	modelObj = Driver(state='-2')
-	kiosk =  LimonadaStateMachine() #(modelObj)
-	print("Boot Screen is STATE =", modelObj.state)
-
-	kiosk.Desktop_To_Zoom()
-	print("Zoom Screen is STATE =", modelObj.state)
-
-
-	kiosk.Zoom_To_AppHomeScreen()
-	lauchGUI(QTPY)
-
 	validState = True
+	nextState = -1
 
 	while(validState):
+		try:
+			#nextState = nextStateIs(GUIdrivenState)
+			if(nextState == '1'):
+				print("TODO")
+				#kiosk.currentState = LimonadaStateMachine.qtpyHomeScreen
+				#kiosk.run(qtpyHomeScreen)
+			elif(nextState == '2'):
+				print("TODO")
+			elif(nextState == '3'):
+				print("TODO")
+			elif(nextState == '4'):
+				print("TODO")
+			elif(nextState == '5'):
+				print("TODO")
+			else:
+				print("INVALID STATE")
 
-		nextState = nextStateIs(GUIdrivenState)
-		if(nextState == '1'):
-			kiosk.currentState = LimonadaStateMachine.qtpyHomeScreen
-			#kiosk.run(qtpyHomeScreen)
-		elif(nextState == '2'):
-			print("TODO")
-		elif(nextState == '3'):
-			print("TODO")
-		elif(nextState == '4'):
-			print("TODO")
-		elif(nextState == '5'):
-			print("TODO")
-		else:
-			print("INVALID STATE")
+			# Pause 10 ms to give CPU extra time in while loop
+			time.sleep(0.010)
 
-		# Pause 10 ms to give CPU extra time in while loop
-		time.pause(0.010)
+		except KeyboardInterrupt:
+		    GPIO.cleanup()

@@ -42,49 +42,71 @@
 		var maxQrNum = 199;
 		
 		var timeLeft = 5; <!--Units are seconds->
-    </script>
-
-    <main>
-		
-		<center ><img src="./Images/QRcode0of199.png" / width="540" height="540" alt="QRcode" </center>
 
 		STORE vendNum in Driver.py and pass to complete.HTML
 		<center ><img src={{ qrNum[vendNUm] }} / width="540" height="540" alt="QRcode" </center>
 
-		<center>
-			<h1>Scan QR code with your camera app and enter your email (optional) for a free DuoLingo gift card</h1>
+    </script>
+
+    <main>
+		
+		<center> 
+			<img src="./Images/DuolingoAppStoreQRcode.png" / width="300" height="507" alt="AppStoreQRcode" 
 		</center>
 
+		<br> <br> <br> <br> <br>
+		
+		<center>
+			<h1>Enter your email (optional) for a free DuoLingo gift card</h1>
+			<br> <br>
+			
+			 <label for="email">Email </label>
+			 <input type="text" id="emailAddress" placeholder="you@gmail.com">
+			<br> <br>
+			                                                
+		</center>
 
-    <table>
-      	<!--2 row x 2 column table layout in portrait mode 1080 wide x 1980 tall>
-      	<!Heigth = 1980 pixels = 40.0 cm on digital ruler thus (6.60 cm * 48) == 316 pixels>
-      	<!Width  = 1080 pixels = 22.5 cm on digital ruler thus (3.05 cm * 48) == 146 pixels>
-      	<!3.05 cm x 6.60 cm = 316 - 50 pixels to adjust for Pi 1920 to 1870>
+		<center>
+    		<button style="background-color: #21A419; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor1\">
+			<center> LIME FLAVOR  </center>
+			<center ><img src="./Images/Flavor1CanPic.png" / width="150" height="150" alt="Flavor1" </center>
 
-      	<tr> <!START ROW #1>
-        	<td width="250" height="250">
-    			<button style="background-color: #21A419; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 50; border-radius: 40px;" type="/Flavor1\">
-				<center> LIME FLAVOR  </center>
-				<center ><img src="./Images/Flavor1.png" / width="200" height="200" alt="Flavor1" </center>
-        	</td> <!ROW 1, COL 1>
+			<button style="background-color: #D7292C; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor2\">
+			<center> STRAWBERRY FLAVOR </center>
+			<center ><img src="./Images/Flavor2CanPic.png" / width="150" height="150" alt="Flavor2" </center>
+		
+    		<button style="background-color: #F35576; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor1\">
+			<center> WATERMELON FLAVOR  </center>
+			<center ><img src="./Images/Flavor3CanPic.png" / width="150" height="150" alt="Flavor3" </center>
 
-        	<td width="250" height="250">
-    			<button style="background-color: #D7292C; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 50; border-radius: 40px;" type="/Flavor1\">
-				<center> STAWBERRY FLAVOR </center>
-				<center ><img src="./Images/Flavor2.png" / width="200" height="200" alt="Flavor2" </center>
-        	</td> <!ROW 1, COL 2>
-      	</tr> <!END ROW #1>
+    		<button style="background-color: #FD6F21; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor2\">
+			<center> STAWBERRY FLAVOR </center>
+			<center ><img src="./Images/Flavor4CanPic.png" / width="150" height="150" alt="Flavor4" </center>
+		</center>
+
+		<br> <br>
+		
+		<center> 
+			<a href="{{ url_for('WelcomeScreen', userselection='Welcome') }}", method="GET"> 5, 4, 3, 2, 1
+			</a>
+		</center>
+
+    	<table>
+      		<!--2 row x 2 column table layout in portrait mode 1080 wide x 1980 tall>
+      		<!Heigth = 1980 pixels = 40.0 cm on digital ruler thus (6.60 cm * 48) == 316 pixels>
+      		<!Width  = 1080 pixels = 22.5 cm on digital ruler thus (3.05 cm * 48) == 146 pixels>
+      		<!3.05 cm x 6.60 cm = 316 - 50 pixels to adjust for Pi 1920 to 1870>
+
+      		<tr> <!START ROW #1>
+        		<td width="250" height="250">
+        		</td> <!ROW 1, COL 1>
+
+        		<td width="250" height="250">
+        		</td> <!ROW 1, COL 2>
+      		</tr> <!END ROW #1>
 
 
-		<!--TODO ROW #2>
-	</table>
-
-	<center> 
-		<a href="{{ url_for('WelcomeScreen', userselection='Welcome') }}", method="GET">
-			<p>Go home after 5 seconds</p>
-		</a>
-	</center>
+		</table>
 	
     </main>
   </body>
