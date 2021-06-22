@@ -1,24 +1,22 @@
 <!--
  * @file complete.html
  * @author Blaze Sanders Robotic Beverage Technologies Inc
- * @date 2020-02-19
+ * @date 2021-06-22
  * @link https://aryaboudaie.com/python/technical/educational/web/flask/2018/10/17/flask.html
- * @version 0.0
+ * @version 1.0
  *
- * @brief HTML code to render final screen for the CoCoTaps food service system
+ * @brief HTML code to render final screen for the Limonada kiosk with QR code and flavoe bittons
  *	
  * @section DESCRIPTION
  *
  * Brand colors: 
- * Dark Green (0x086D38), Light Green (0x86C042), 
+ * Green (0x21A419), Yellow (0xF0E836), Silver (0xA1A1A1) 
  * Apple White (0xFDFDFD), White (0xFFFFFF),
  * Apple Black (0x010306), Logo Black (0x2A3627)
- * 
- * <center><img src="{{ url_for('static', filename='images/CoCoTapsLogoV0.png') }}" width="864" height="402" alt="CoCoTaps Logo"> </center>
  -->
 <html lang="en">
   <head>
-    <title> Tapping complete enjoy </title>
+    <title> Limonada v1 </title>
 
     <!--TODO CSS STUFF HERE-->
     <!-- custom styles -->
@@ -28,33 +26,66 @@
   <body>
     <!--TODO: FIX SCRIPT TO ALLOW USE OF ARRAYS-->
     <script language ="JavaScript">
- 	  var drinkID = new Array();
-	  drinkID[0] = RumCoConut;
-	  var fontSize = 60;
+    	var fontSize = 60; 	<!--Units are pixels->
+	 
+		var qrNum = new Array();
+		var vendnNum = 0
+		qrNum[0] = "./Images/QRcode0of199.png"		
+		qrNum[1] = "./Images/QRcode1of199.png"		
+		qrNum[2] = "./Images/QRcode2of199.png"		
+		qrNum[3] = "./Images/QRcode3of199.png"		
+		qrNum[4] = "./Images/QRcode4of199.png"		
+		qrNum[5] = "./Images/QRcode5of199.png"		
+		qrNum[6] = "./Images/QRcode6of199.png"		
+		qrNum[7] = "./Images/QRcode7of199.png"		
+		qrNum[8] = "./Images/QRcode8of199.png"		
+		var maxQrNum = 199;
+		
+		var timeLeft = 5; <!--Units are seconds->
     </script>
-    <main>
-        <div class="container flex-column flex-container justify-space-between">
-            <div class="text-center">
-                <img class="tap-your-thirst-img" src="../static/images/short-cut-top.png" alt="coco taps logo">
-            </div>
-            <div class="text-center">
-                <h1 class="final-text">Time to Tap your Thirst</h1>
-            </div>
-            <div class="flex-container justify-center">
-                <div class="cursor-pointer flex-container flex-column align-center">
-                    <h1 class="final-text">Come back to cut top off</h1>
-                    <img class="down-arrow" src="../static/images/stretched-down-arrow.png" alt="down arrow">
-                    <img class="down-arrow" src="../static/images/stretched-down-arrow.png" alt="down arrow">
-                    <img class="down-arrow" src="../static/images/stretched-down-arrow.png" alt="down arrow">
-                </div>
-            </div>
-            <div>
-                <a href="{{ url_for('WelcomeScreen', userselection='Welcome') }}", method="GET" >
-                      <p>Home</p>
-                </a>
-            </div>
-        </div>
-    </main>
 
+    <main>
+		
+		<center ><img src="./Images/QRcode0of199.png" / width="540" height="540" alt="QRcode" </center>
+
+		STORE vendNum in Driver.py and pass to complete.HTML
+		<center ><img src={{ qrNum[vendNUm] }} / width="540" height="540" alt="QRcode" </center>
+
+		<center>
+			<h1>Scan QR code with your camera app and enter your email (optional) for a free DuoLingo gift card</h1>
+		</center>
+
+
+    <table>
+      	<!--2 row x 2 column table layout in portrait mode 1080 wide x 1980 tall>
+      	<!Heigth = 1980 pixels = 40.0 cm on digital ruler thus (6.60 cm * 48) == 316 pixels>
+      	<!Width  = 1080 pixels = 22.5 cm on digital ruler thus (3.05 cm * 48) == 146 pixels>
+      	<!3.05 cm x 6.60 cm = 316 - 50 pixels to adjust for Pi 1920 to 1870>
+
+      	<tr> <!START ROW #1>
+        	<td width="250" height="250">
+    			<button style="background-color: #21A419; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 50; border-radius: 40px;" type="/Flavor1\">
+				<center> LIME FLAVOR  </center>
+				<center ><img src="./Images/Flavor1.png" / width="200" height="200" alt="Flavor1" </center>
+        	</td> <!ROW 1, COL 1>
+
+        	<td width="250" height="250">
+    			<button style="background-color: #D7292C; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 50; border-radius: 40px;" type="/Flavor1\">
+				<center> STAWBERRY FLAVOR </center>
+				<center ><img src="./Images/Flavor2.png" / width="200" height="200" alt="Flavor2" </center>
+        	</td> <!ROW 1, COL 2>
+      	</tr> <!END ROW #1>
+
+
+		<!--TODO ROW #2>
+	</table>
+
+	<center> 
+		<a href="{{ url_for('WelcomeScreen', userselection='Welcome') }}", method="GET">
+			<p>Go home after 5 seconds</p>
+		</a>
+	</center>
+	
+    </main>
   </body>
 </html>
