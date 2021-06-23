@@ -4,17 +4,13 @@ __author__  =  "Blaze Sanders"
 __email__   =  "blaze.d.a.sanders@gmail.com"
 __company__ =  "Unlimited Custom Creations"
 __status__  =  "Development"
-__date__    =  "Late Updated: 2021-06-21"
+__date__    =  "Late Updated: 2021-06-23"
 __doc__     =  "Class to utlize simple audio and AWS Polly for voice generation "
 """
 
-# sudo apt install sox
-
-# Sample code Speak.py is based off
-# https://docs.aws.amazon.com/polly/latest/dg/get-started-what-next.html
-
 # Allow the use of the AWS SDK in Python
 # https://pypi.org/project/boto3/
+# https://docs.aws.amazon.com/polly/latest/dg/get-started-what-next.html
 from boto3 import Session
 from botocore.exceptions import BotoCoreError, ClientError
 
@@ -26,16 +22,6 @@ from contextlib import closing
 # https://docs.python.org/3/library/os.html
 import os
 import sys
-
-# Allow BASH commands to be run inside python code like this file
-# https://docs.python.org/3/library/subprocess.html
-import subprocess
-from subprocess import Popen, PIPE
-from subprocess import check_call
-
-# Allow creation of temporary directory to save harddrive space
-# https://docs.python.org/3/library/tempfile.html
-from tempfile import gettempdir
 
 # Allow 'dependency-free' playback of .wav audio on Linux, MacOS, &> 17 # https://simpleaudio.readthedocs.io/en/latest/
 import simpleaudio as sa
@@ -86,10 +72,10 @@ class Speak:
 	SPAN_YOU_DESERVE_PART_1 = "TODO"
 	SPAN_YOU_DESERVE_PART_2 = "TODO"
 
-	ENG_COME_ON = "Come on! Show me you know more than nachos in Spanish, try again."
+	ENG_COME_ON =  "ENG_COME_ON.wav" # Come on! Show me you know more than nachos in Spanish, try again.
 	SPAN_COME_ON = "TODO"
 
-	ENG_SPAN_NOPE = "Nope, but TODO"
+	ENG_SPAN_NOPE = "ENG_SPAN_NOPE.wav" # Nope, but TODO"
 	ENG_NOPE = "Nope, but"
 	SPAN_NOPE = "TODO"
 
@@ -97,9 +83,9 @@ class Speak:
 
 	ENG_SORRY_HERE_IS_DUOLINGO = "Sorry, but that is TODO for you. TODO here take a DuoLingo subscription for you to improve."
 
-	SPAN_ENG_HEY_DUOLINGO "TODO. Hey you just got a DuoLingo subscription to learn Spanish."
+	SPAN_ENG_HEY_DUOLINGO = "TODO. Hey you just got a DuoLingo subscription to learn Spanish."
 	SPAN_HEY_DUOLINGO = "TODO"
-	ENG_HEY_DUOLINGO "Hey you just got a DuoLingo subscription to learn Spanish."
+	ENG_HEY_DUOLINGO = "Hey you just got a DuoLingo subscription to learn Spanish."
 
 
 	WORKING_TEXT = "We will have your drink in just a few seconds."
@@ -109,17 +95,23 @@ class Speak:
 	NULL = -1
 	SOX = 0
 	AWS = 1
-	SIMPLE_AUDIO
+	SIMPLE_AUDIO = 2
+
 	STATE_0_TEXT = ""
 	STATE_9_TEXT = ""
 
 
 	def unitTest():
 
-		TestObject1 = Speak(Speak.ENG_SCENE_2, Speak.SIMPLE_AUDIO)
+		TestObject1 = Speak(Speak.ENG_COME_ON, Speak.SIMPLE_AUDIO)
 		TestObject1.say()
-
 		time.sleep(3)
+
+
+		TestObject2 = Speak(Speak.ENG_SPAN_NOPE, Speak.SIMPLE_AUDIO)
+		TestObject1.say()
+		time.sleep(3)
+
 
 	def __init__(self, text, voiceId):
 		"""
@@ -144,24 +136,35 @@ class Speak:
 		# UPDATE this dictionary, Speak.py global CONSTANTS,
 		# and the ~/Limonada/Audio folder to add new clips
 		self.voiceRepliesDict = {
-			Speak.ENG_BAD_ACCENT_TEXT: 0,
-			Speak.ENG_SCENE_1: 1,
-			Speak.ENG_SCENE_2: 2,
-			Speak.ENG_SCENE_3: 3,
-			Speak.ENG_SCENE_4: 4,
-			Speak.ENG_SCENE_5: 5,
-			Speak.NULL: 6,
-			Speak.NULL: 7,
-			Speak.NULL: 8,
-			Speak.NULL: 9,
-			Speak.SPAN_BAD_ACCENT_TEXT: 10,
-			Speak.SPAN_SCENE_1: 11,
-			Speak.SPAN_SCENE_2: 12,
-			Speak.SPAN_SCENE_3: 13,
-			Speak.SPAN_SCENE_4: 14,
-			Speak.SPAN_SCENE_5: 15,
-			Speak.NULL: 16
+			Speak.ENG_ONE_MORE_TIME_TEXT: 0,
+			Speak.SPAN_ONE_MORE_TIME_TEXT: 1,
+			Speak.ENG_SPAN_TRY_AGAIN_TEXT: 2,
+			Speak.ENG_TRY_AGAIN_TEXT: 3,
+			Speak.SPAN_TRY_AGAIN_TEXT: 4,
+			Speak.SPAN_ENG_ANOTHER_TRY: 5,
+			Speak.ENG_ANOTHER_TRY: 6,
+			Speak.SPAN_ANOTHER_TRY: 7,
+			Speak.SPAN_ENG_TRUE_MEXICAN_DRINK: 8,
+			Speak.ENG_TRUE_MEXICAN_DRINK: 9,
+			Speak.SPAN_TRUE_MEXICAN_DRINK: 10,
+			Speak.SPAN_ENG_YOU_DESERVE: 11,
+			Speak.ENG_YOU_DESERVE: 12,
+			Speak.SPAN_YOU_DESERVE_PART_1: 13,
+			Speak.SPAN_YOU_DESERVE_PART_2: 15,
+			Speak.ENG_COME_ON: 16,
+			Speak.SPAN_COME_ON: 17,
+			Speak.ENG_SPAN_NOPE: 18,
+			Speak.ENG_NOPE: 19,
+			Speak.SPAN_NOPE: 20,
+			Speak.ENG_NO_ACCENT_HERE_IS_LIMONADA: 21,
+			Speak.ENG_SORRY_HERE_IS_DUOLINGO: 22,
+			Speak.SPAN_ENG_HEY_DUOLINGO: 23,
+			Speak.SPAN_HEY_DUOLINGO: 24,
+			Speak.ENG_HEY_DUOLINGO: 25
 		}
+
+
+
 
 		self.soundId = self.voiceRepliesDict[text]
 		pathEnding = "./Audio/" + text
