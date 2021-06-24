@@ -1,7 +1,7 @@
 <!--
  * @file complete.html
  * @author Blaze Sanders Robotic Beverage Technologies Inc
- * @date 2021-06-22
+ * @date 2021-06-24
  * @link https://aryaboudaie.com/python/technical/educational/web/flask/2018/10/17/flask.html
  * @version 1.0
  *
@@ -29,7 +29,7 @@
     	var fontSize = 60; 	<!--Units are pixels->
 	 
 		var qrNum = new Array();
-		var vendnNum = 0
+		var numOfVendsCompleted = 0
 		qrNum[0] = "./Images/QRcode0of199.png"		
 		qrNum[1] = "./Images/QRcode1of199.png"		
 		qrNum[2] = "./Images/QRcode2of199.png"		
@@ -43,8 +43,8 @@
 		
 		var timeLeft = 5; <!--Units are seconds->
 
-		STORE vendNum in Driver.py and pass to complete.HTML
-		<center ><img src={{ qrNum[vendNUm] }} / width="540" height="540" alt="QRcode" </center>
+		STORE numOfVendsCompleted in Driver.py and pass to complete.HTML
+		<center ><img src={{ qrNum[numOfVendsCompleted] }} / width="540" height="540" alt="QRcode" </center>
 
     </script>
 
@@ -61,27 +61,27 @@
 			<br> <br>
 			
 			 <label for="email">Email </label>
-			 <input type="text" id="emailAddress" placeholder="you@gmail.com">
+			 <input type="text" id="emailAddress" placeholder="you@gmail.com" value="YOU@HOTMAIL.COM">
 			<br> <br>
 			                                                
 		</center>
 
 		<center>
-    		<button style="background-color: #21A419; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor1\">
+    		<button style="background-color: #21A419; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 195px; height: 470px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor1\">
 			<center> LIME FLAVOR  </center>
-			<center ><img src="./Images/Flavor1CanPic.png" / width="150" height="150" alt="Flavor1" </center>
+			<center ><img src="./Images/Flavor1CanPic.png" / width="155" height="430" alt="Flavor1" </center>
 
-			<button style="background-color: #D7292C; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor2\">
+			<button style="background-color: #D7292C; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 195px; height: 470px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor2\">
 			<center> STRAWBERRY FLAVOR </center>
-			<center ><img src="./Images/Flavor2CanPic.png" / width="150" height="150" alt="Flavor2" </center>
+			<center ><img src="./Images/Flavor2CanPic.png" / width="155" height="430" alt="Flavor2" </center>
 		
-    		<button style="background-color: #F35576; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor1\">
+    		<button style="background-color: #F35576; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 195px; height: 470px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor1\">
 			<center> WATERMELON FLAVOR  </center>
-			<center ><img src="./Images/Flavor3CanPic.png" / width="150" height="150" alt="Flavor3" </center>
+			<center ><img src="./Images/Flavor3CanPic.png" / width="155" height="430" alt="Flavor3" </center>
 
-    		<button style="background-color: #FD6F21; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 270px; height: 270px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor2\">
+    		<button style="background-color: #FD6F21; color: #FEFC45; display: inline-block; margin: 20px; padding: 15px 5px; width: 195px; height: 470px; font-weight: bold; font-size: 25; border-radius: 40px;" type="/Flavor2\">
 			<center> STAWBERRY FLAVOR </center>
-			<center ><img src="./Images/Flavor4CanPic.png" / width="150" height="150" alt="Flavor4" </center>
+			<center ><img src="./Images/Flavor4CanPic.png" / width="155" height="430" alt="Flavor4" </center>
 		</center>
 
 		<br> <br>
@@ -99,14 +99,16 @@
 
       		<tr> <!START ROW #1>
         		<td width="250" height="250">
-        		</td> <!ROW 1, COL 1>
+        		TEST ROW 1 COL 2
+			</td> <!ROW 1, COL 1>
 
         		<td width="250" height="250">
-        		</td> <!ROW 1, COL 2>
+        		TEST ROW 1 COL 2
+			</td> <!ROW 1, COL 2>
       		</tr> <!END ROW #1>
 
 
-		</table>
+	</table>
 	
     </main>
   </body>

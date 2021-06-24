@@ -1,7 +1,7 @@
 <!-- TODO ADD FANCY CSS
  * @file welcome.html
  * @author Blaze Sanders Robotic Beverage Technologies Inc
- * @date 2021-06-21
+ * @date 2021-06-24
  * @version 1.0
  *
  * @brief HTML code to render 1st Limonada kiosk touch enabled screen 
@@ -20,7 +20,7 @@
  -->
 <html lang="en">
   <head>
-    <title> Limonada v1 </title>
+    <title> Limonada Welcome Screen </title>
 
     <!--TODO CSS STUFF HERE-->
     <!Try using Arial typeface first and Source Sans Pro last> 
@@ -29,14 +29,17 @@
   </head>
 
   <body>
-    <!--TODO: FIX SCRIPT TO ALLOW USE OF ARRAYS-->
-    <script language ="JavaScript">
- 	  var drinkID = new Array();
-	  drinkID[0] = RumCoConut;
-	  date = TODO
-	  firstName = TODO
-	  var fontSize = 60;
-    </script>
+    	<!--TODO: FIX SCRIPT TO ALLOW USE OF ARRAYS-->
+    	<script language ="JavaScript">
+		dateValue = "1986/10/30"
+	  	firstNameString = "Jane"
+	  	var fontSize = 60;
+
+		var yearSelect = document.querySelector('#year');
+		var monthSelect = document.querySelector('#month');
+		var daySelect = document.querySelector('#day');
+    	</script>
+
     <main>
         <div class="container flex-column flex-container justify-space-between">
             <div>
@@ -58,16 +61,14 @@
 
 
             <div class="flex-container justify-center">
-                <div class="cursor-pointer flex-container flex-column">
 					<center>
 						<label for="birthday">Enter your birthday </label>
-						<input type="date" id="birthday" placeholder="2003-07-04">
-						<center> <date picker> </center> <br>
+						<input type="date" id="birthday" name="userBirthday" placeholder="1986-10-30" value=dateValue min="1921-07-09" max="2000-07-09">
 
-						<br>
+						<br> <br>
 						
 						<label for="firstname">Enter your first name </label>
-						<input type="text" id="firstname" placeholder="optional">
+						<input type="text" id="firstname" placeholder="optional" value=firstNameString>
 
 						<br>
 						
@@ -75,16 +76,15 @@
 
 					<br> <br> <br> <br> <br> <br> <br>
 
-					<center>
-                       <button class="border-box text-center text-container">
-                       <!-- VISBLE SPACE IN BITTON TEXT -->
-                       <h1>　　START EXPERIENCE　　</h1>
-                       </button>
-					</center>
+			<center>
+                       		<button class="border-box text-center text-container">
+                       		<!-- THERE ARE INVISBLE SPACES IN THE BUTTON TEXT -->
+                       		<h1>　　START EXPERIENCE　　</h1>
+                       		</button>
+			</center>
                     <!-- <img class="down-arrow" src="../static/images/stretched-down-arrow.png" alt="down arrow">-->
-                </div>
-            </div>
-        </div>
+           </div>
+
     </main>
   </body>
 </html>
