@@ -1,6 +1,10 @@
-import sys, json, numpy as np
+import sys, json
 
-#Read data from std
+# Allow use of arrays not native to python
+# https://numpy.org/doc/stable/user/absolute_beginners.html
+import numpy as np
+
+# Read data from std
 def read_in():
     lines = sys.stdin.readlines()
     return json.loads(lines[0])
@@ -10,11 +14,11 @@ def main():
 
     np_lines = np.array(lines)
 
-    #use numpys sum method to find sum of all elements in the array
+    # Use numpys sum method to find sum of all elements in the array
     lines_sum = np.sum(np_lines)
 
 
 
-#start process
+# Start process
 if __name__ == '__main__':
     main()
