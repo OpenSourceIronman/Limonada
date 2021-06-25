@@ -8,6 +8,26 @@ IP address for UCC Raspberry Pi on Wifi 76Spectrum5G in shop is 192.168.0.30
 
 This Git repo holds code for many open source libraries. It's broken down into the following directories (TODO)
 
+
+Raspberry Pi uses the following libraries: <br>
+pip3 install simpleaudio <br>
+pip3 install RPi.GPIO <br>
+
+
+We might use the following libraries: <br>
+pip3 install pyautogui <br>
+pip3 install flask <br>
+pip install python-statemachine <br>
+sudo apt-get install qttools5-dev-tools <br>
+pip install pyqt5-tools <br>
+sudo dnf install qt5-designer <br>
+
+
+We may use the following libraries if robotic voices & a Flutter API is needed for v2 <br>
+pip3 install boto3 <br>
+pip3 install contextlib2 <br>
+pip3 install urllibs <br>
+                                  
 The code was written on and designed to run on the TODO Linux Distro on a Raspberry Pi 4
 Download TODO for the Raspberry Pi 4 at TODO 
 
@@ -19,25 +39,6 @@ sudo ddrescue -D --force ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img 
 Where the ? in sd? can be determined by using the "lsblk" command to find your microSD card name.
 
 
-Raspberry Pi uses the following libraries: <br>
-pip3 install simpleaudio <br>
-pip3 install RPi.GPIO <br>
-pip3 install pyautogui <br>
-pip3 install flask <br>
-
-We might use the following libraries: <br>
-pip install python-statemachine <br>
-sudo apt-get install qttools5-dev-tools <br>
-pip install pyqt5-tools <br>
-sudo dnf install qt5-designer <br>
-
-
-We may use the following libraries if robotic voices & a Flutter API is needed for v2 <br>
-pip3 install boto3 <br>
-pip3 install  <br>
-pip3 install contextlib2 <br>
-pip3 install urllibs <br>
-                                  
                                        
 A DRAFT state machine can be found at: <br>
 https://lucid.app/lucidchart/invitations/accept/inv_8e0a642b-567e-4aaa-acec-19c1edf9d852?viewport_loc=233%2C209%2C2308%2C1094%2C0_0 

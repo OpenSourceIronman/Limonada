@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
 	elif(hardware == LINUX_PC):
 
-		# Install simple command line TODO .MP3 or .WAV audio player
+		# Install easy to use command line .MP3 or .WAV audio player
 		check_call("sudo apt install sox", shell=True) # CLI command is "play file.wav"
 
 		# https://raspberrypi.stackexchange.com/questions/34119/gpio-library-on-windows-while-developing
