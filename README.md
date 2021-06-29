@@ -3,7 +3,7 @@ Limonada Smart Vending Machine <br>
 
 IP address for JMAR Raspberry Pi on ethernet is 192.168.1.60 <br>
 IP address for UCC Raspberry Pi on Wifi network 76Spectrum5G at the shop is 192.168.0.30 <br>
-IP address for UCC Raspberry Pi on Wifi network NETGEAR89 at Blaze's home is 192.168.1.24 <br>
+IP address for UCC Raspberry Pi on Wifi network NETGEAR89 at Blaze's home is 192.168.1.4 <br>
 
 This Git repo holds code for many open source libraries. It's broken down into the following directories (Limonada-Backend, Limonada-UI, LimonadaPiServer, HTML, LimonadaDevEnv, and FUTURE_WORK). <br>
 
