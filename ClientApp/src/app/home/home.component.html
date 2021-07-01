@@ -1,23 +1,34 @@
 <div class="main-div">
-  <h1> Welcome to Limanado   </h1>
 
+  <center>
+    <img class="logo-img" src="./Images/LimonadaCan.png" alt="Limonada Can">
+    <img src="./Images/LimonadaCanHorizontal.png" / width="788" height="357" alt="White background can"> 
+  </center>
+
+
+  <center> <h1> Please enter info below  </h1> </center>
+
+  <center>
     <mat-form-field appearance="fill">
-      <mat-label>Select your birth day!</mat-label>
+      <mat-label>Enter your birthday </mat-label>
       <input matInput [matDatepicker]="picker"
-             (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="today" required>
+             (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="2000-07-09" required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   <div>
       <mat-form-field appearance="fill" *ngIf="isShow===true">
-        <mat-label>Enter Your Name</mat-label>
+        <mat-label>Enter your first name </mat-label>
         <input matInput>
       </mat-form-field>
-    </div>
+  </div>
+  <center>
+    
+    <center>
     <mat-card-actions>
-      <button mat-raised-button color="accent"(click)="btnClick();">Next</button>
+      <button mat-raised-button color="accent"(click)="btnClick();">START EXPERIENCE</button>
     </mat-card-actions>
-
+    <center>
 </div>
 
 
