@@ -1,9 +1,0 @@
-<mat-form-field appearance="outline">
-  <mat-label>Choose a date</mat-label>
-  <input matInput [matDatepicker]="picker" [formControl]="ageFormControl">
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-  <mat-error>Error</mat-error>
-  <mat-error *ngIf="ageFormControl.hasError('tooJung')">You are too jung!</mat-error>
-  <mat-error *ngIf="ageFormControl.hasError('tooOld')">You are too old!</mat-error>
-</mat-form-field>
