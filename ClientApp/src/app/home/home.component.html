@@ -1,23 +1,36 @@
-<div class="main-div">
-  <h1> Welcome to Limanado   </h1>
+<div class="card-body">
+    <form [formGroup]="validatorForm">
+      <h5>
+        Please enter info below
+      </h5>
+      <div class="form-group col-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Select your birth day!</mat-label>
+          <input matInput
+          [matDatepicker]="picker"
+          formControlName="dob"
+          [max]="today"
+          required>
+           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+<!--          <mat-error *ngIf="hasError('dob','required')">Date of birth is required</mat-error>-->
+          <mat-error *ngIf="dob.errors?.age">
+            No sweet, you are younger than 21
+          </mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Select your birth day!</mat-label>
-      <input matInput [matDatepicker]="picker"
-             (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [max]="today" required>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  <div>
-      <mat-form-field appearance="fill" *ngIf="isShow===true">
-        <mat-label>Enter Your Name</mat-label>
-        <input matInput>
-      </mat-form-field>
-    </div>
-    <mat-card-actions>
-      <button mat-raised-button color="accent"(click)="btnClick();">Next</button>
-    </mat-card-actions>
-
+      </div>
+      <div class="form-group col-6">
+          <mat-form-field appearance="fill" *ngIf="dob.errors?.age===null">
+            <mat-label>Enter Your Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter Your Name">
+<!--            <mat-error *ngIf="hasError('name','required')">Name is required</mat-error>-->
+          </mat-form-field>
+      </div>
+      <div>
+        <button mat-raised-button color="accent"(click)="btnClick();">Start Experience</button>
+      </div>
+    </form>
 </div>
 
 
