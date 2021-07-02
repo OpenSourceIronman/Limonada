@@ -1,0 +1,18 @@
+When Blaze runs "ng serve -o" inside "ClientApp" folder I get the following errors.
+The same "ng serve command -o" inside /Limonada/AngularBlazeTest/LimonadaAngularApp  folder works fine :)
+
+An unhandled exception occurred: Cannot find module '@angular-devkit/build-angular/package.json'
+Require stack:
+- /usr/local/lib/node_modules/@angular/cli/node_modules/@angular-devkit/architect/node/node-modules-architect-host.js
+- /usr/local/lib/node_modules/@angular/cli/node_modules/@angular-devkit/architect/node/index.js
+- /usr/local/lib/node_modules/@angular/cli/models/architect-command.js
+- /usr/local/lib/node_modules/@angular/cli/commands/serve-impl.js
+- /usr/local/lib/node_modules/@angular/cli/node_modules/@angular-devkit/schematics/tools/export-ref.js
+- /usr/local/lib/node_modules/@angular/cli/node_modules/@angular-devkit/schematics/tools/index.js
+- /usr/local/lib/node_modules/@angular/cli/utilities/json-schema.js
+- /usr/local/lib/node_modules/@angular/cli/models/command-runner.js
+- /usr/local/lib/node_modules/@angular/cli/lib/cli/index.js
+- /usr/local/lib/node_modules/@angular/cli/lib/init.js
+- /usr/local/lib/node_modules/@angular/cli/bin/ng
+See "/private/var/folders/cs/d462nwc92d5fr3hbf9dq0p5c0000gn/T/ng-l3zWMp/angular-errors.log" for further details.
+
