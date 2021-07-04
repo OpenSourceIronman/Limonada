@@ -4,16 +4,9 @@ __author__  =  "Blaze Sanders"
 __email__   =  "blaze.d.a.sanders@gmail.com"
 __company__ =  "Unlimited Custom Creations"
 __status__  =  "Development"
-__date__    =  "Late Updated: 2021-06-21"
+__date__    =  "Late Updated: 2021-07-02"
 __doc__     =  "Logic to run back-end services via state changes in GUI"
 """
-
-# TODO ONLY IF MEDIA COMPUTER IS NOT USED
-# Connect microphone to Raspberry Pi
-# https://pimylifeup.com/raspberrypi-microphone/
-# Connect camera to Raspberry Pi
-# https://www.hackster.io/shahizat005/getting-started-with-raspberry-pi-camera-8eec28
-# https://www.e-consystems.com/4k-usb-camera.asp
 
 # Allow control of mouse & keyboard to start Zoom app and meeting
 # https://pyautogui.readthedocs.io/en/latest/
@@ -33,6 +26,10 @@ from subprocess import check_call
 # Allow pausing of code to sync with User Interface
 # https://docs.python.org/3/library/time.html
 import time
+
+# Allow programmantic control of the mouse and keyboard
+# https://pyautogui.readthedocs.io/en/latest/
+import pyautogui
 
 # Allow creation of temporary directory to save harddrive space
 # https://docs.python.org/3/library/tempfile.html
@@ -87,14 +84,9 @@ class Driver(object):
 	THIS_CODES_FILENAME = os.path.basename(__file__)
 
 	# Zoom Vidoe & Audio CONSTANTS
-	MISSION_CONTROL_ZOOM_URL = "https://us04web.zoom.us/j/2770448765?pwd=MUVJWGZUelJHMmNuYW4xL0hndjdHQT09"
-	ZOOM_MEETING_ID = 2770448765
-	ZOOM_PASSCODE = "8ND3ae"
-
-https://zoom.us/j/7168730259?pwd=c2M4WGYzSTBrYTNFMmlDZDdjZnRBQT09
-716 873 0259
-5Vb9sL
-
+	MISSION_CONTROL_ZOOM_URL = "https://zoom.us/j/7168730259?pwd=c2M4WGYzSTBrYTNFMmlDZDdjZnRBQT09"
+	ZOOM_MEETING_ID = "7168730259"
+	ZOOM_PASSCODE = "5vb9sL"
 
 
 	def __init__(self, state):
@@ -237,7 +229,7 @@ https://zoom.us/j/7168730259?pwd=c2M4WGYzSTBrYTNFMmlDZDdjZnRBQT09
 		check_call("sudo reboot", shell=True)
 
 
-	def startZoom():
+	def startZoom(DebugObject):
 		"""
 		Use this start Zoom app, full screen it, and then pyautogui click to start meeting
 		https://support.zoom.us/hc/en-us/articles/205683899-hot-keys-and-keyboard-for-zoom
@@ -245,45 +237,49 @@ https://zoom.us/j/7168730259?pwd=c2M4WGYzSTBrYTNFMmlDZDdjZnRBQT09
 		"""
 
 		# Start Zoom application and minimize to give ordering GUI screen
-		command =  "xdg-open " + MISSION_CONTROL_ZOOM_URL
-		check_call(command, shell=True)
+		command =  "xdg-open " + Driver.MISSION_CONTROL_ZOOM_URL
+		try:
+			check_call(command, shell=True)
+		except:
+		#except CalledProcessError:
+			print("Caught Called Process Error exception")
 
 
+		pyautogui.PAUSE = 3	
 		#TODO FIND BUTTON X Y TO JOIN MEEETING
-		time.pause(3)
-		X_POS = 500
-		Y_POS = 700
-		pyautogui.click(XPOS, YPOS)
-		time.pause(3)
+		xPos = 500
+		yPos = 700
+		DebugObject.Lprint("Pausing for 3 seconds to JOIN meeting and then clicking")
+		pyautogui.click(xPos, yPos)
+		time.sleep(3)
 
 		# Enter fullscreen after meeting has started
+		DebugObject.Lprint("Pausing for 3 seconds to JOIN meeting and then clicking")
 		pyautogui.press('esc')
 
 		#TODO FIND BUTTON X Y TO TURN ON CAMERA IF NOT TODO DEFAULT ON
-		time.pause(3)
-		X_POS = 200
-		Y_POS = 1820
-		pyautogui.click(XPOS, YPOS)
-		time.pause(3)
+		xPos = 200
+		yPos = 1820
+		DebugObject.Lprint("Pausing for 3 seconds to JOIN meeting and then clicking")
+		pyautogui.click(xPos, yPos)
 
 		#TODO FIND BUTTON X Y TO TURN ON MIC IF NOT TODO DEFAULT ON
-		time.pause(3)
-		X_POS = 100
-		Y_POS = 1820
-		pyautogui.click(XPOS, YPOS)
-		time.pause(3)
+		xPos = 100
+		yPos = 1820
+		DebugObject.Lprint("Pausing for 3 seconds to JOIN meeting and then clicking")
+		pyautogui.click(xPos, yPos)
 
 		# Exit fullscreen
+		DebugObject.Lprint("Pausing for 3 seconds to press ESC and EXIT full screen Zoom app")
 		pyautogui.press('esc')
 
 		# TODO Minimize Zoom app so that Limonada GUI as focus
 		# https://support.zoom.us/hc/en-us/articles/201362103-Minimizing-and-exiting-Zoom?mobile_site=true
 		# To minimize the Zoom desktop client window so that it continues to run in the background, click on the green circle with the x inside located at the top-right corner of the Zoom window. 
-		time.pause(3)
-		X_POS = 1000
-		Y_POS = 80
-		pyautogui.click(XPOS, YPOS)
-		time.pause(3)
+		xPos = 1000
+		yPos = 80
+		DebugObject.Lprint("Pausing for 3 seconds to press ESC and EXIT full screen Zoom app")
+		pyautogui.click(xPos, yPos)
 
 
 if __name__ == "__main__":
@@ -294,14 +290,17 @@ if __name__ == "__main__":
 
 	GPIO.setmode(GPIO.BOARD)
 
-	if(Driver.DEBUG_STATEMENTS_ON):
-		#Driver.unitTest()
-		print("Uncomment unitTest()?")
 	# Hardware back-end driver that launches GUI front-end
 	# TODO @Murali - OF DOES GUI front-end driver call into back-end?
 
 	validState = True
 	nextState = -1
+
+	if(Driver.DEBUG_STATEMENTS_ON):
+		while(validState):
+			DebugObject.Dprint("Starting Zoom call and PyAutoGUI")
+			Driver.startZoom(DebugObject)
+			DebugObject.Dprint("Looping startZoom() test")
 
 	while(validState):
 		try:

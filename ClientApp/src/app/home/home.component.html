@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container">
   <div class="row">
     <form  [formGroup]="validatorForm">
@@ -8,21 +9,34 @@
         </h1>
       </div>
       <div>
+=======
+<div class="card-body">
+    <form [formGroup]="validatorForm">
+      <h5>
+        Please enter info below
+      </h5>
+      <div class="form-group col-6">
+>>>>>>> d61304b339e920c6e2512a46a638b3d4ff503b5d
         <mat-form-field appearance="fill">
-          <mat-label>Select your birth day!</mat-label>
+          <mat-label>Select your birthday: </mat-label>
           <input matInput
           [matDatepicker]="picker"
           formControlName="dob"
-          [max]="today"
+          [max]="2000-07-09"
           required>
            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="hasError('dob','required')">Date of birth is required</mat-error>
           <mat-error *ngIf="dob.errors?.age">
+<<<<<<< HEAD
             Age should not be less than 18 years
+=======
+            Sorry, you are younger than 21
+>>>>>>> d61304b339e920c6e2512a46a638b3d4ff503b5d
           </mat-error>
         </mat-form-field>
       </div>
+<<<<<<< HEAD
       <div>
         <mat-form-field appearance="fill" *ngIf="dob.errors?.age===null">
           <mat-label>Enter Your Name</mat-label>
@@ -36,6 +50,19 @@
     </form>
   </div>
 
+=======
+      <div class="form-group col-6">
+          <mat-form-field appearance="fill" *ngIf="dob.errors?.age===null">
+            <mat-label>Enter your first name: </mat-label>
+            <input matInput formControlName="name" placeholder="Enter Your Name">
+<!--            <mat-error *ngIf="hasError('name','required')">Name is required</mat-error>-->
+          </mat-form-field>
+      </div>
+      <div>
+        <button mat-raised-button color="accent"(click)="btnClick();">START EXPERIENCE/button>
+      </div>
+    </form>
+>>>>>>> d61304b339e920c6e2512a46a638b3d4ff503b5d
 </div>
 
 

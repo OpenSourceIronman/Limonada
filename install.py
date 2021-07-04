@@ -122,6 +122,9 @@ if __name__ == "__main__":
 		# https://raspberrypi.stackexchange.com/questions/34119/gpio-library-on-windows-while-developing
 		# pip install GPIOSimulator + import GPIOSimulator as GPIO
 
+	elif(hardware == MAC_OS):
+		# sudo pip3 install virtualenv virtualenvwrapper
+
 	else:
 		print("INVALID CLI ARGUMENTS: 'python3 install -d LinuxPC' is valid for example")
 

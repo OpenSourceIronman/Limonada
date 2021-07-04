@@ -1,1 +1,12 @@
-NULL
+Driver.py DAY & TIME: Fri Jul  2 17:35:24 2021
+Driver.py MESSAGE: Pausing for 3 seconds to JOIN meeting and then clicking
+Driver.py DAY & TIME: Fri Jul  2 17:35:30 2021
+Driver.py MESSAGE: Pausing for 3 seconds to JOIN meeting and then clicking
+Driver.py DAY & TIME: Fri Jul  2 17:35:33 2021
+Driver.py MESSAGE: Pausing for 3 seconds to JOIN meeting and then clicking
+Driver.py DAY & TIME: Fri Jul  2 17:35:36 2021
+Driver.py MESSAGE: Pausing for 3 seconds to JOIN meeting and then clicking
+Driver.py DAY & TIME: Fri Jul  2 17:35:40 2021
+Driver.py MESSAGE: Pausing for 3 seconds to press ESC and EXIT full screen Zoom app
+Driver.py DAY & TIME: Fri Jul  2 17:35:40 2021
+Driver.py MESSAGE: Pausing for 3 seconds to press ESC and EXIT full screen Zoom app
