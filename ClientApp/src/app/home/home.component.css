@@ -1,7 +1,12 @@
-.card-body{
-  margin: 0 auto;
-  float: none;
-  width: 45%;
-  margin-top: 70px;
-  margin-bottom: 10px;
+.container{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header{
+  padding-bottom: 20px;
+}
+mat-form-field {
+  width: 80%;
 }

@@ -14,7 +14,7 @@ export function AgeValidator(control: AbstractControl): { [key: string]: boolean
 
   debugger
 
-  if (age < 21) {
+  if (age < 18) {
     return { 'age': true };
   }
   return null;
@@ -66,6 +66,7 @@ export class HomeComponent {
   btnClick = function () {
     debugger
     if (this.validatorForm.valid) {
+      console.log(this.validatorForm.value)
       this.router.navigateByUrl('/second');
     }
 
