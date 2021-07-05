@@ -22,17 +22,17 @@ export class SecondComponentComponent implements OnInit {
 
   ngOnInit() {
   }
-callBootel1(){
-//call api here
-}
-callBootel2(){
-//call api here
-}
-callBootel3(){
-//call api here
-}
-callBootel4(){
-//call api here
-}
+  callBootel1() {
+  // call api here
+  }
+  callBootel2() {
+  // call api here
+  }
+  callBootel3() {
+  // call api here
+  }
+  callBootel4() {
+  // call api here
+  }
 
 }
