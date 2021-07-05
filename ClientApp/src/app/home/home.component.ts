@@ -14,7 +14,7 @@ export function AgeValidator(control: AbstractControl): { [key: string]: boolean
 
   debugger
 
-  if (age < 18) {
+  if (age < 21) {
     return { 'age': true };
   }
   return null;
@@ -54,8 +54,8 @@ export class HomeComponent {
   constructor(private _formBuilder: FormBuilder , private router:Router ) {
   }
   validatorForm = this._formBuilder.group({
-    dob:['', [Validators.required, AgeValidator]],
-    name:['',Validators.required]
+    dob:['', [Validators.required, AgeValidator]]
+    // name:['',Validators.required]
   })
   get dob() {
     return this.validatorForm.get('dob');

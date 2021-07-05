@@ -1,0 +1,14 @@
+.my-class{
+  height:150px;
+  margin: 10px;
+  line-height: 22px;
+}
+.container{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header{
+  margin-left: 10px;
+}
