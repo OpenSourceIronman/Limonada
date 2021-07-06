@@ -1,10 +1,21 @@
-<section>
-  <div class="example-label">Select your Drink Option</div>
-  <div class="example-button-row">
-    <button mat-flat-button color="primary">Primary</button>
-    <mat-divider></mat-divider>
-    <button mat-flat-button color="accent">Accent</button>
-    <mat-divider></mat-divider>
-    <button mat-flat-button color="warn">Warn</button>
+<div class="container">
+  <div class="row">
+    <form>
+    <div>
+      <h4 class="header">
+        Select your Drink
+      </h4>
+    </div>
+    <div>
+      <button mat-flat-button color="primary" class="my-class" (click)="callBootel1()">Bottel1</button>
+
+      <button mat-flat-button color="primary" class="my-class" (click)="callBootel2()">Bottel2</button>
+
+      <button mat-flat-button color="primary" class="my-class" (click)="callBootel3()">Bottel3</button>
+
+      <button mat-flat-button color="primary" class="my-class" (click)="callBootel4()">Bottel4</button>
+    </div>
+  </form>
   </div>
-</section>
+</div>
+
