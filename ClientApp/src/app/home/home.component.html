@@ -47,12 +47,14 @@
       <div class="picker-wrapper">
         <div class="picker">
             <input class="date-input"
+                  [matDatepicker]="picker"
                   placeholder="MM / DD / YYYY"
                   [formControl]="date_picker"
-                  [appDateInputFormatter]="date_picker"
+                  (click)="picker.open()"
+                  [max]="today"
                   >
             <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
-            <!-- <mat-datepicker #picker></mat-datepicker> -->
+            <mat-datepicker #picker></mat-datepicker>
             <!-- <mat-error *ngIf="hasError('date_picker','required')">Date of birth is required</mat-error> -->
         </div>
         <mat-error *ngIf="age < 21 && show_error">
