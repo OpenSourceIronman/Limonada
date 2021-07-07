@@ -1,3 +1,39 @@
+<!-- old code -->
+<!-- <mat-card class="lim-card">
+  <img mat-card-image src="assets/img/logo-with-text.png" alt="Lim">
+    <form  [formGroup]="validatorForm">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label style="font-weight: bold;font-size: 20px; align-content: center">MM / DD / YYYY </mat-label>
+          <input matInput
+                 [matDatepicker]="picker"
+                 formControlName="dob"
+                 [max]="today"
+                 required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="hasError('dob','required')">Date of birth is required</mat-error>
+          <mat-error *ngIf="dob.errors?.age">
+            Age should not be less than 21 years
+          </mat-error>
+        </mat-form-field>
+      </div> -->
+      
+      <!-- <div>
+        <mat-form-field appearance="fill" *ngIf="dob.errors?.age===null">
+          <mat-label>Enter Your Name</mat-label>
+          <input matInput formControlName="name" placeholder="Enter Your Name">
+          <mat-error *ngIf="hasError('name','required')">Name is required</mat-error>
+        </mat-form-field>
+      </div> -->
+
+      <!-- <div>
+        <button mat-raised-button color="primary"(click)="btnClick();">Next</button>
+      </div>
+    </form>
+</mat-card> -->
+
+<!-- old code -->
 
 <div class="container">
   <div class="main-card">
@@ -11,18 +47,17 @@
       <div class="picker-wrapper">
         <div class="picker">
             <input class="date-input"
-                  [matDatepicker]="picker"
                   placeholder="MM / DD / YYYY"
                   [formControl]="date_picker"
-                  [max]="today"
+                  [appDateInputFormatter]="date_picker"
                   >
             <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
-            <mat-datepicker #picker></mat-datepicker>
-            <!-- <mat-error *ngIf="hasError('dob','required')">Date of birth is required</mat-error>
-            <mat-error *ngIf="dob.errors?.age">
-              Age should not be less than 21 years
-            </mat-error> -->
+            <!-- <mat-datepicker #picker></mat-datepicker> -->
+            <!-- <mat-error *ngIf="hasError('date_picker','required')">Date of birth is required</mat-error> -->
         </div>
+        <mat-error *ngIf="age < 21 && show_error">
+          Age should not be less than 21 years
+        </mat-error>
         <div class="picker-bottom-label">
           <p>MONTH</p>
           <p>DAY</p>

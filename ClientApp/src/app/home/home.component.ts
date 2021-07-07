@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public age = 0;
   date_picker = new FormControl(null, Validators.required);
   public today = new Date();
+  public show_error: boolean = false;
 
 
 // oldcode
@@ -72,10 +73,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       let val = moment(value).format('MM/DD/YYYY');
       // if date matach to pattern then calulate age
       if(this.date_regex.test(val)){
+        this.show_error = false;
         let user_age = moment(`${val}`);
         let today = moment();
         this.age = today.diff(user_age, 'years');
-
+      } else {
+        this.show_error = true;
       }
     })
   }

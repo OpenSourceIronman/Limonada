@@ -16,7 +16,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { SecondComponentComponent } from './second-component/second-component.component';
 
-
+// directive
+import { DateInputFormatterDirective } from './directives/date-input-formatter.directive';
 
 @NgModule({
   declarations: [
@@ -25,18 +26,19 @@ import { SecondComponentComponent } from './second-component/second-component.co
     HomeComponent,
     SecondComponentComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    DateInputFormatterDirective
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-    HttpClientModule, 
+    HttpClientModule,
     FormsModule,
-    ReactiveFormsModule, 
-    MatCardModule, 
+    ReactiveFormsModule,
+    MatCardModule,
     MatButtonModule,
-    MatDatepickerModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatNativeDateModule,
     MatIconModule,
     RouterModule.forRoot([
@@ -44,7 +46,7 @@ import { SecondComponentComponent } from './second-component/second-component.co
       {path: 'counter', component: CounterComponent},
       {path: 'second', component: SecondComponentComponent},
     ]),
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     MatDividerModule
   ],
   providers: [],
