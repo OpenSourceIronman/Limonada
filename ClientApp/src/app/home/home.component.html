@@ -1,41 +1,43 @@
+
 <div class="container">
-  <div class="row">
-    <form  [formGroup]="validatorForm">
-
-      <div >
-        <h1 class="header">
-          Welcome to Limanado
-        </h1>
+  <div class="main-card">
+    <div class="logo">
+      <img src="assets/img/logo-with-text.png" alt="Lim">
+    </div>
+    <div class="picker-container">
+      <div class="left-arrow-container">
+        <img src="assets/img/orange-left.png" alt="left-arrow">
       </div>
-      <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Select your birth day!</mat-label>
-          <input matInput
-          [matDatepicker]="picker"
-          formControlName="dob"
-          [max]="today"
-          required>
-           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngIf="hasError('dob','required')">Date of birth is required</mat-error>
-          <mat-error *ngIf="dob.errors?.age">
-            Age should not be less than 18 years
-          </mat-error>
-        </mat-form-field>
+      <div class="picker-wrapper">
+        <div class="picker">
+            <input class="date-input"
+                  [matDatepicker]="picker"
+                  placeholder="MM / DD / YYYY"
+                  [formControl]="date_picker"
+                  [max]="today"
+                  >
+            <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
+            <mat-datepicker #picker></mat-datepicker>
+            <!-- <mat-error *ngIf="hasError('dob','required')">Date of birth is required</mat-error>
+            <mat-error *ngIf="dob.errors?.age">
+              Age should not be less than 21 years
+            </mat-error> -->
+        </div>
+        <div class="picker-bottom-label">
+          <p>MONTH</p>
+          <p>DAY</p>
+          <p>YEAR</p>
+        </div>
       </div>
-      <!-- <div>
-        <mat-form-field appearance="fill" *ngIf="dob.errors?.age===null">
-          <mat-label>Enter Your Name</mat-label>
-          <input matInput formControlName="name" placeholder="Enter Your Name">
-          <mat-error *ngIf="hasError('name','required')">Name is required</mat-error>
-        </mat-form-field>
-      </div> -->
-      <div>
-        <button mat-raised-button color="primary"(click)="btnClick();">Next</button>
+      <div class="right-arrow-container">
+        <img src="assets/img/orange-right.png" alt="right-arrow">
       </div>
-    </form>
+    </div>
+    <div class="next-button-container" *ngIf="age >= 21">
+      <button mat-raised-button (click)="gotoSecond()">Next</button>
+    </div>
+    <div>
+      <img src="assets/img/orange-wave.png" alt="orange-wave">
+    </div>
   </div>
-
 </div>
-
-

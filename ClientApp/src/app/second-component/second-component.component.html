@@ -1,21 +1,32 @@
-<div class="container">
-  <div class="row">
-    <form>
-    <div>
-      <h4 class="header">
-        Select your Drink
-      </h4>
+<div class="main-card">
+  <div class="content">
+    <div class="logo">
+      <img src="assets/img/white-logo-with-text.png" alt="Lim">
     </div>
-    <div>
-      <button mat-flat-button color="primary" class="my-class" (click)="callBootel1()">Bottel1</button>
-
-      <button mat-flat-button color="primary" class="my-class" (click)="callBootel2()">Bottel2</button>
-
-      <button mat-flat-button color="primary" class="my-class" (click)="callBootel3()">Bottel3</button>
-
-      <button mat-flat-button color="primary" class="my-class" (click)="callBootel4()">Bottel4</button>
+    <div class="upper-arrow">
+      <img src="assets/img/white-arrow.png" alt="down-arrow">
+      <div class="line"></div>
     </div>
-  </form>
+    <div class="bottle-section">
+      <h2 class="title">PICK YOUR FLAVOR!</h2>
+      <div class="bottle-wrapper">
+        <div class="img-button" (click)="selectCane('lemon lime')">
+          <img src="assets/img/flavor/lemon.png" alt="lemon lime">
+        </div>
+        <div class="img-button" (click)="selectCane('strawberry')">
+          <img src="assets/img/flavor/strawberry.png" alt="strawberry">
+        </div>
+        <div class="img-button" (click)="selectCane('watermelon')">
+          <img src="assets/img/flavor/watermelon.png" alt="watermelon">
+        </div>
+        <div class="img-button" (click)="selectCane('grapefruit')">
+          <img src="assets/img/flavor/grapefruit.png" alt="grapefruit">
+        </div>
+      </div>
+    </div>
+    <div class="bottom-arrow">
+      <div class="line"></div>
+      <img src="assets/img/white-arrow.png" alt="down-arrow">
+    </div>
   </div>
 </div>
-

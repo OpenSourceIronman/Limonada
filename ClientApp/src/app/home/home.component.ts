@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import {  ErrorStateMatcher, MatDatepickerInputEvent } from '@angular/material';
 import { Router } from '@angular/router';
+
+import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 
 export function AgeValidator(control: AbstractControl): { [key: string]: boolean } | null {
   const today = new Date();
@@ -12,7 +15,7 @@ export function AgeValidator(control: AbstractControl): { [key: string]: boolean
     age--;
   }
 
-  debugger
+  // debugger
 
   if (age < 21) {
     return { 'age': true };
@@ -22,13 +25,21 @@ export function AgeValidator(control: AbstractControl): { [key: string]: boolean
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
-export class HomeComponent {
-  events: string[] = [];
-  isShow:boolean;
-  today = new Date();
+export class HomeComponent implements OnInit, OnDestroy {
+  private date_regex = /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/;
+  private date_picker_subcription: Subscription;
+  public age = 0;
+  date_picker = new FormControl(null, Validators.required);
+  public today = new Date();
 
+
+// oldcode
+
+  // events: string[] = [];
+  // isShow:boolean;
   // addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
   //   debugger
   //   this.events.push(`${type}: ${event.value}`);
@@ -51,8 +62,30 @@ export class HomeComponent {
   //   return this.isShow;
   // }
 
+  // oldcode
+
   constructor(private _formBuilder: FormBuilder , private router:Router ) {
   }
+
+  ngOnInit(){
+    this.date_picker_subcription = this.date_picker.valueChanges.subscribe((value)=>{
+      let val = moment(value).format('MM/DD/YYYY');
+      // if date matach to pattern then calulate age
+      if(this.date_regex.test(val)){
+        let user_age = moment(`${val}`);
+        let today = moment();
+        this.age = today.diff(user_age, 'years');
+
+      }
+    })
+  }
+
+  ngOnDestroy(){
+    this.date_picker_subcription.unsubscribe();
+  }
+
+  
+// unused code / old code
   validatorForm = this._formBuilder.group({
     dob:['', [Validators.required, AgeValidator]]
     // name:['',Validators.required]
@@ -64,11 +97,15 @@ export class HomeComponent {
     return this.validatorForm.controls[controlName].hasError(errorName);
   }
   btnClick = function () {
-    debugger
+    // debugger
     if (this.validatorForm.valid) {
       console.log(this.validatorForm.value)
       this.router.navigateByUrl('/second');
     }
+  };
+  // unused code / old code
 
-};
+  gotoSecond(){
+    this.router.navigateByUrl('/second');
+  }
 }

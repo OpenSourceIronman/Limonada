@@ -22,6 +22,11 @@ export class SecondComponentComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  selectCane(bottleName: string){
+    alert(`You pick ${bottleName}`);
+  }
+
   callBootel1() {
   // call api here
   }
