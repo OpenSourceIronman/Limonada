@@ -4,13 +4,21 @@ __author__  =  "Blaze Sanders"
 __email__   =  "blaze.d.a.sanders@gmail.com"
 __company__ =  "Unlimited Custom Creations"
 __status__  =  "Development"
-__date__    =  "Late Updated: 2021-07-02"
+__date__    =  "Late Updated: 2021-07-04"
 __doc__     =  "Logic to run back-end services via state changes in GUI"
 """
 
 # Allow control of mouse & keyboard to start Zoom app and meeting
 # https://pyautogui.readthedocs.io/en/latest/
-# STILL NEEDED IF ZOOM IS ON MAC MINI? import pyautogui
+import pyautogui
+
+# Allow GPIO control of HDMI switcher 
+# https://learn.adafruit.com/circuitpython-on-any-computer-with-ft232h
+# https://learn.adafruit.com/circuitpython-on-any-computer-with-ft232h/mac-osx
+import board  
+
+# Simple GPIO HIGH and LOW
+import digitalio
 
 # Allow program to extract filename of the current file and exit gracefully
 # https://docs.python.org/3/library/os.html
@@ -34,9 +42,6 @@ import pyautogui
 # Allow creation of temporary directory to save harddrive space
 # https://docs.python.org/3/library/tempfile.html
 from tempfile import gettempdir
-
-# Allow Driver.py to follow the hardware state machine based off GUI process flow
-# TODO FUTURE WORD from LimonadaStateMachine import *
 
 # Generate .txt data logging and custom terminal debugging output
 from Debug import *
@@ -70,11 +75,6 @@ class Driver(object):
 	CANNED_DRINK = 0
 	GIFT_CARD_IN_CAN = 1
 
-	# GUI framework CONSTANTS
-	FLASK = 0
-	QTPY = 1
-	VEND4YOU = 2
-
 	# Function return and debugging helper CONSTANTS
 	OK = 1
 	NOT_OK = 0
@@ -95,89 +95,54 @@ class Driver(object):
 		"""
 		self.state = state
 
-	def unitTest():
-		print("Starting Limonada Driver.py Unit Test")
+		# Run the following commands in the command line before running Driver.py
+		# export BLINKA_FT232H=1
+		check_call("export BLINKA_FT232H=1", shell=True)
+		
+		# python3
+		check_call("python3", shell=True)
+		
+		# import board
+		pyautogui.write("import board")
+		
+		# from pyftdi.ftdi import Ftdi
+		pyautogui.write("from pyftdi.ftdi import Ftdi", shell=True)
+		
+		# Ftdi().open_from_url('ftdi:///?')
+		pyautogui.write("Ftdi().open_from_url('ftdi:///?')")
+	
+		# python3 
+		check_call("python3", shell=True)
 
-		# Rotate screen into portrait mode
-		# https://www.raspberrypi.org/forums/viewtopic.php?t=212008
-		check_call("xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate right --output DP-1 --off", shell=True)
+		# import os
+		pyautogui.write("import os")
 
+		# os.environ["BLINKA_FT232H"]
+		# import digitialio
 
-		modelObj = Driver(state='-2')
-		kiosk =  LimonadaStateMachine() #(modelObj)
-		print("Boot Screen is STATE =", modelObj.state)
-
-		kiosk.Desktop_To_Zoom()
-		print("Zoom Screen is STATE =", modelObj.state)
-
-
-		kiosk.Zoom_To_AppHomeScreen()
-		lauchGUI(QTPY)
-
-
-	def launchGUI(framework):
+	def toggleHDMIport():
 		"""
-    	TODO
-
-    	Key arguments:
-   		framework -- INTERGER: Global CONSTANT for GUI framework this code should launch in parallel
-
-    	Return:
-    	OK if GUI was launched succesfully, and NOT_OK otherwise
-		"""
-
-		if(framework == VEND4YOU):
-			print("CMS")
-		elif(framework == FLASK):
-			Debug.Dprint("GUI generated using Flask microframework")
-			#TODO Launch GUI.py on 2nd Pi or 2nd thread
-			return OK
-		elif(framework == QTPY):
-			Debug.Dprint("GUI generated using QTPY framework")
-			#TODO Launch GUI.py on 2nd Pi or 2nd thread
-			return OK
-		else:
-			Debug.Dprint("LIKE A DIFFERENT GUI BUILDER? SUBMIT PULL REQUEST")
-
-		return NOT_OK
-
-	def switchHDMIto(portNumber):
-		"""
-		TODO
-		# https://raspberrypi.stackexchange.com/questions/99823/rpi-uart-control-ir-remote-hdmi-switch-problem
-
-		BOM TO PURCHASE
-		IR LED 5mm (940nm) - TSAL6200
-		IR Receiver Module (3.3V type) - TSOP38238
-		2N2222 NPN transistor
-		36 Ohm 1/4W Resistor
-		680 Ohm 1/4W Resistor
-		10K Ohm 1/4W Resistor
-
+		Cycle through HDMI inputs connected, skipping any port not input video into switcher
+		Using FT232H from Adafruit to simulate human button press of 1.5 seconds 
+		on ASIN B0739GSKV2 HDMI switcher from Amazon
+		
 		Key argument(s):
-		portNumber -- INTERGER: HDMI input to use to driver ouput on HDMI switcher ASIN: B0739GSKV2
-		https://www.amazon.com/dp/B0739GSKV2/?coliid=I1G5FSDF5QEW1I&colid=1YXO1OO36TF2L&psc=1&ref_=lv_ov_lig_dp_it
+		NONE
 
 		Return:
 		True if ALL the steps to switch HMDI input where successfull; False otherwise
 		"""
 
 		successfullSwitch = False
-
-		if(portNumber == 1):
-			portPin = BCM1
-			successfullSwitch = True
-		elif(portNumber == 2):
-			portPin = BCM1
-			successfullSwitch = True
-		else:
-			DebugObject = Debug(DEBUG_STATEMENTS_ON, THIS_CODES_FILENAME)
-			DebugObject.Dprint("INVALID HDMI port number passed as parameter to Driver.switchHDMIto()")
-
-		GPIO.cleanup()
-		GPIO.setup(portPin, GPIO.OUT, initial=GPIO.LOW)
-		GPIO.output(portPin, HIGH)
-
+		led = digitalio.DigitalInOut(board.D7)
+		led = led.direction = digitalio.Direction.OUTPUT
+		
+		led.value = False
+		time.sleep(1.5)
+		led.value = True
+		
+		successfullSwitch = True
+		
 		return successfullSwitch
 
 
@@ -290,25 +255,27 @@ if __name__ == "__main__":
 
 	GPIO.setmode(GPIO.BOARD)
 
-	# Hardware back-end driver that launches GUI front-end
-	# TODO @Murali - OF DOES GUI front-end driver call into back-end?
-
 	validState = True
 	nextState = -1
 
 	if(Driver.DEBUG_STATEMENTS_ON):
 		while(validState):
+			Driver.toggleHDMIport()
+			time.sleep(3)
+			Driver.toggleHDMIport()
+			time.sleep(3)
+			Driver.toggleHDMIport()
+			time.sleep(3)
+
 			DebugObject.Dprint("Starting Zoom call and PyAutoGUI")
 			Driver.startZoom(DebugObject)
 			DebugObject.Dprint("Looping startZoom() test")
-
+			
 	while(validState):
 		try:
 			#nextState = nextStateIs(GUIdrivenState)
 			if(nextState == '1'):
 				print("TODO")
-				#kiosk.currentState = LimonadaStateMachine.qtpyHomeScreen
-				#kiosk.run(qtpyHomeScreen)
 			elif(nextState == '2'):
 				print("TODO")
 			elif(nextState == '3'):
