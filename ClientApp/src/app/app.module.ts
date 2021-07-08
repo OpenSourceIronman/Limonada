@@ -15,11 +15,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { SecondComponentComponent } from './second-component/second-component.component';
+import { MatRippleModule } from '@angular/material/core';
 
-// directive
-import { DateInputFormatterDirective } from './directives/date-input-formatter.directive';
+import { KaypadComponent } from './kaypad/kaypad.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
+  entryComponents: [
+    KaypadComponent
+  ],
   declarations: [
     AppComponent,
     NavMenuComponent,
@@ -27,18 +31,19 @@ import { DateInputFormatterDirective } from './directives/date-input-formatter.d
     SecondComponentComponent,
     CounterComponent,
     FetchDataComponent,
-    DateInputFormatterDirective
+    KaypadComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-    HttpClientModule,
+    HttpClientModule, 
     FormsModule,
-    ReactiveFormsModule,
-    MatCardModule,
+    ReactiveFormsModule, 
+    MatCardModule, 
     MatButtonModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
+    MatDatepickerModule, 
+    MatFormFieldModule, 
+    MatRippleModule,
+    MatInputModule, 
     MatNativeDateModule,
     MatIconModule,
     RouterModule.forRoot([
@@ -46,8 +51,10 @@ import { DateInputFormatterDirective } from './directives/date-input-formatter.d
       {path: 'counter', component: CounterComponent},
       {path: 'second', component: SecondComponentComponent},
     ]),
-    BrowserAnimationsModule,
-    MatDividerModule
+    BrowserAnimationsModule, 
+    MatDividerModule,
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

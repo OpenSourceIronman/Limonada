@@ -24,7 +24,7 @@ export class SecondComponentComponent implements OnInit {
   }
 
   selectCane(bottleName: string){
-    alert(`You pick ${bottleName}`);
+    // alert(`You pick ${bottleName}`);
   }
 
   callBootel1() {

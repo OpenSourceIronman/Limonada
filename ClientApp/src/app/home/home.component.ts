@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import {  ErrorStateMatcher, MatDatepickerInputEvent } from '@angular/material';
+import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { KaypadComponent } from 'src/app/kaypad/kaypad.component';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 export function AgeValidator(control: AbstractControl): { [key: string]: boolean } | null {
   const today = new Date();
@@ -14,9 +15,6 @@ export function AgeValidator(control: AbstractControl): { [key: string]: boolean
   if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
     age--;
   }
-
-  // debugger
-
   if (age < 21) {
     return { 'age': true };
   }
@@ -29,12 +27,14 @@ export function AgeValidator(control: AbstractControl): { [key: string]: boolean
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  private date_regex = /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/;
   private date_picker_subcription: Subscription;
   public age = 0;
-  date_picker = new FormControl(null, Validators.required);
   public today = new Date();
   public show_error: boolean = false;
+  public shake_error: boolean = false;
+  private dialogRef: MatDialogRef<any> = null;
+  private dateExp = /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/;
+  public date_picker = new FormControl(null, [Validators.required, Validators.pattern(this.dateExp)]);
 
 
 // oldcode
@@ -65,50 +65,74 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // oldcode
 
-  constructor(private _formBuilder: FormBuilder , private router:Router ) {
+  constructor(private _formBuilder: FormBuilder , private router:Router, private dialog: MatDialog) {
   }
 
   ngOnInit(){
-    this.date_picker_subcription = this.date_picker.valueChanges.subscribe((value)=>{
-      let val = moment(value).format('MM/DD/YYYY');
-      // if date matach to pattern then calulate age
-      if(this.date_regex.test(val)){
-        this.show_error = false;
-        let user_age = moment(`${val}`);
-        let today = moment();
-        this.age = today.diff(user_age, 'years');
-      } else {
-        this.show_error = true;
-      }
-    })
+    // this.date_picker_subcription = this.date_picker.valueChanges.subscribe((value)=>{
+      
+    //   // let val = moment(value).format('MM/DD/YYYY');
+
+    //   // if date matach to pattern then calulate age
+    //   // if(this.date_regex.test(val)){
+    //   //   this.show_error = false;
+    //   //   let user_age = moment(`${val}`);
+    //   //   let today = moment();
+    //   //   this.age = today.diff(user_age, 'years');
+    //   // } else {
+    //   //   this.show_error = true;
+    //   // }
+    // })
   }
 
   ngOnDestroy(){
     this.date_picker_subcription.unsubscribe();
   }
 
-  
-// unused code / old code
-  validatorForm = this._formBuilder.group({
-    dob:['', [Validators.required, AgeValidator]]
-    // name:['',Validators.required]
-  })
-  get dob() {
-    return this.validatorForm.get('dob');
-  }
-  public hasError = (controlName: string, errorName: string) => {
-    return this.validatorForm.controls[controlName].hasError(errorName);
-  }
-  btnClick = function () {
-    // debugger
-    if (this.validatorForm.valid) {
-      console.log(this.validatorForm.value)
-      this.router.navigateByUrl('/second');
-    }
-  };
-  // unused code / old code
 
-  gotoSecond(){
+  gotoSecondPage(){
     this.router.navigateByUrl('/second');
+  }
+
+  openKeypad(){
+    if(!this.dialogRef){
+      this.dialogRef = this.dialog.open(KaypadComponent, {
+        position: {
+          bottom: '0px'
+        },
+        minWidth: '100%',
+        data: this.date_picker,
+        autoFocus: false,
+        hasBackdrop: false
+      });
+
+      this.date_picker_subcription = this.dialogRef.afterClosed().pipe(
+        finalize(() => this.dialogRef = null)
+      ).subscribe(()=>{
+        this.shake_error = false;
+        this.show_error = false;
+        if(this.dateExp.test(this.date_picker.value)){
+          let val = moment(this.date_picker.value).format('MM/DD/YYYY');
+          this.show_error = false;
+          let user_age = moment(`${val}`);
+          let today = moment();
+          this.age = today.diff(user_age, 'years');
+          if(this.age >= 21){
+            setTimeout(()=>{
+              this.gotoSecondPage();
+              if(this.dialogRef){
+                this.dialogRef.close();
+              }
+            }, 2500);
+          } else {
+            this.show_error = true;
+          }
+        } else {
+          this.show_error = true;
+          this.shake_error = true;
+        }
+      });
+    }
+
   }
 }

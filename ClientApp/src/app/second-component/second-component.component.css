@@ -14,8 +14,9 @@
 } */
 /* old code */
 
-.main-card{
+.main-container{
   height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,43 +24,55 @@
   background-color: #114a70;
 }
 
-.main-card .content{
+.main-container .main-card{
+  height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
-.main-card .content .upper-arrow{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.main-container .main-card .logo img{
+  height: 450px;
+  width: 650px;
 }
 
-.main-card .content .upper-arrow img{
-  height: 80px;
-  width: 80px;
-}
-.line{
-  width: 500px;
-  border-bottom: 4px solid #f7b453;
-}
-
-.main-card .content .bottom-arrow{
+.main-container .main-card .upper-arrow{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
+  margin-bottom: 120px;
 }
 
-.main-card .content .bottom-arrow img{
-  height: 80px;
-  width: 80px;
+.main-container .main-card .upper-arrow img{
+  height: 50px;
+  width: 50px;
+  margin-bottom: 45px;
   transform: rotate(180deg);
 }
 
-.main-card .content .bottle-section{
+.line{
+  width: 550px;
+  border-bottom: 8px solid #f7b453;
+}
+
+.main-container .main-card .bottom-arrow{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.main-container .main-card .bottom-arrow img{
+  height: 50px;
+  width: 50px;
+  margin-top: 45px;
+}
+
+.main-container .main-card .bottle-section{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,24 +80,26 @@
   margin: 50px 0px;
 }
 
-.main-card .content .bottle-section .title{
+.main-container .main-card .bottle-section .title{
   color: #ffffff;
-  font-weight: 300;
-  font-size: 38px;
-  margin: 15px 0;
+  font-weight: 400;
+  font-size: 52px;
+  letter-spacing: 12px;
+  margin: 0 0 60px 0;
 }
 
-.main-card .content .bottle-section .bottle-wrapper{
+.main-container .main-card .bottle-section .bottle-wrapper{
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.main-card .content .bottle-section .bottle-wrapper .img-button{
+.main-container .main-card .bottle-section .bottle-wrapper .img-button{
   cursor: pointer;
 }
-.main-card .content .bottle-section .bottle-wrapper .img-button img{
-  width: 150px;
-  height: 260px;
+.main-container .main-card .bottle-section .bottle-wrapper .img-button img{
+  width: 200px;
+  margin: 0px 7px;
+  height: auto;
 }

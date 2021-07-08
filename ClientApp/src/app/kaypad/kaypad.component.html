@@ -1,0 +1,26 @@
+<div class="keypad-container">
+    <div class="kaypad-row">
+        <button mat-button (click)="setNumber(1)" class="keypad-btn">1</button>
+        <button mat-button (click)="setNumber(2)" class="keypad-btn">2</button>
+        <button mat-button (click)="setNumber(3)" class="keypad-btn">3</button>
+    </div>
+    <div class="kaypad-row">
+        <button mat-button (click)="setNumber(4)" class="keypad-btn">4</button>
+        <button mat-button (click)="setNumber(5)" class="keypad-btn">5</button>
+        <button mat-button (click)="setNumber(6)" class="keypad-btn">6</button>
+    </div>
+    <div class="kaypad-row">
+        <button mat-button (click)="setNumber(7)" class="keypad-btn">7</button>
+        <button mat-button (click)="setNumber(8)" class="keypad-btn">8</button>
+        <button mat-button (click)="setNumber(9)" class="keypad-btn">9</button>
+    </div>
+    <div class="kaypad-row">
+        <button mat-icon-button (click)="backspace()" class="keypad-btn">
+            <mat-icon class="icon">backspace</mat-icon>
+        </button>
+        <button mat-button (click)="setNumber(0)" class="keypad-btn">0</button>
+        <button mat-icon-button (click)="done()" class="keypad-btn">
+            <mat-icon class="icon">check</mat-icon>
+        </button>
+    </div>
+</div>

@@ -18,7 +18,7 @@
           </mat-error>
         </mat-form-field>
       </div> -->
-      
+
       <!-- <div>
         <mat-form-field appearance="fill" *ngIf="dob.errors?.age===null">
           <mat-label>Enter Your Name</mat-label>
@@ -35,45 +35,33 @@
 
 <!-- old code -->
 
-<div class="container">
+<div class="main-container">
   <div class="main-card">
     <div class="logo">
       <img src="assets/img/logo-with-text.png" alt="Lim">
     </div>
     <div class="picker-container">
-      <div class="left-arrow-container">
-        <img src="assets/img/orange-left.png" alt="left-arrow">
-      </div>
-      <div class="picker-wrapper">
-        <div class="picker">
-            <input class="date-input"
-                  [matDatepicker]="picker"
-                  placeholder="MM / DD / YYYY"
-                  [formControl]="date_picker"
-                  (click)="picker.open()"
-                  [max]="today"
-                  >
-            <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
-            <mat-datepicker #picker></mat-datepicker>
-            <!-- <mat-error *ngIf="hasError('date_picker','required')">Date of birth is required</mat-error> -->
-        </div>
-        <mat-error *ngIf="age < 21 && show_error">
-          Age should not be less than 21 years
-        </mat-error>
-        <div class="picker-bottom-label">
-          <p>MONTH</p>
-          <p>DAY</p>
-          <p>YEAR</p>
-        </div>
-      </div>
       <div class="right-arrow-container">
         <img src="assets/img/orange-right.png" alt="right-arrow">
       </div>
+      <div class="picker-wrapper">
+        <div class="picker">
+            <input class="date-input" [ngClass]="{'error': date_picker.hasError('pattern'), 'animate__animated animate__shakeX': shake_error}" placeholder="MM / DD / YYYY" [formControl]="date_picker" (click)="openKeypad()">
+        </div>
+        <div class="picker-bottom-label">
+          <p class="month">MONTH</p>
+          <p class="day">DAY</p>
+          <p class="year">YEAR</p>
+        </div>
+        <mat-error class="error" style = "font-size: 50px" *ngIf="age < 21 && show_error">
+          You must be at least 21
+        </mat-error>
+      </div>
+      <div class="left-arrow-container">
+        <img src="assets/img/orange-left.png" alt="left-arrow">
+      </div>
     </div>
-    <div class="next-button-container" *ngIf="age >= 21">
-      <button mat-raised-button (click)="gotoSecond()">Next</button>
-    </div>
-    <div>
+    <div class="wave">
       <img src="assets/img/orange-wave.png" alt="orange-wave">
     </div>
   </div>
