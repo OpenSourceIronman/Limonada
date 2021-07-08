@@ -1,8 +1,3 @@
-# Allow Adafruit FT232H to communicate over USB
-import board
-import digitalio
-import os
-
 # Allow BASH commands to be run inside python code like this file
 # https://docs.python.org/3/library/subprocess.html
 import subprocess
@@ -11,25 +6,38 @@ from subprocess import check_call
 
 import time
 
-def toggle():
-	hdmiNPN = digitalio.DigitalInOut(board.C3)
-	hdmiNPN = led.direction = digitalio.Direction.OUTPUT
+# Allow Adafruit FT232H to communicate over USB
+import board
+import digitalio
+import os
 
-	hdmiNPN.value = False
-	time.sleep(1.5)
-	hdmiNPN.value = True
+import pyautogui
+
+class switch:
+	def toggle():
+		hdmiNPN = digitalio.DigitalInOut(board.C3)
+		hdmiNPN = led.direction = digitalio.Direction.OUTPUT
+
+		hdmiNPN.value = False
+		time.sleep(1.5)
+		hdmiNPN.value = True
 
 
 if __name__ == "__main__":
 	# Run the following commands in the command line before running
-	# export BLINKA_FT232H=1
+	print("export BLINKA_FT232H=1")
 	check_call("export BLINKA_FT232H=1", shell=True)
 
-	# python3
+	#print("python3 -c 'from switch import *; toggle()'")
+	#check_call("python3 -c 'from switch import *; toggle()'", shell=True)
+
+	print("Check Call Python3")
 	check_call("python3", shell=True)
 
 	# import board
-	pyautogui.write("import board")
+	print("Writing import board")
+	check_call("import board", shell=True)
+	#pyautogui.write("import board")
 
 	# from pyftdi.ftdi import Ftdi
 	pyautogui.write("from pyftdi.ftdi import Ftdi", shell=True)
