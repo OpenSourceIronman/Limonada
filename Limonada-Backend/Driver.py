@@ -4,7 +4,7 @@ __author__  =  "Blaze Sanders"
 __email__   =  "blaze.d.a.sanders@gmail.com"
 __company__ =  "Unlimited Custom Creations"
 __status__  =  "Development"
-__date__    =  "Late Updated: 2021-07-04"
+__date__    =  "Late Updated: 2021-07-06"
 __doc__     =  "Logic to run back-end services via state changes in GUI"
 """
 
@@ -12,10 +12,10 @@ __doc__     =  "Logic to run back-end services via state changes in GUI"
 # https://pyautogui.readthedocs.io/en/latest/
 import pyautogui
 
-# Allow GPIO control of HDMI switcher 
+# Allow GPIO control of HDMI switcher
 # https://learn.adafruit.com/circuitpython-on-any-computer-with-ft232h
 # https://learn.adafruit.com/circuitpython-on-any-computer-with-ft232h/mac-osx
-import board  
+import board
 
 # Simple GPIO HIGH and LOW
 import digitalio
@@ -37,7 +37,7 @@ import time
 
 # Allow programmantic control of the mouse and keyboard
 # https://pyautogui.readthedocs.io/en/latest/
-import pyautogui
+#import pyautogui
 
 # Allow creation of temporary directory to save harddrive space
 # https://docs.python.org/3/library/tempfile.html
@@ -98,34 +98,39 @@ class Driver(object):
 		# Run the following commands in the command line before running Driver.py
 		# export BLINKA_FT232H=1
 		check_call("export BLINKA_FT232H=1", shell=True)
-		
+
 		# python3
 		check_call("python3", shell=True)
-		
+
 		# import board
 		pyautogui.write("import board")
-		
+
 		# from pyftdi.ftdi import Ftdi
 		pyautogui.write("from pyftdi.ftdi import Ftdi", shell=True)
-		
+
 		# Ftdi().open_from_url('ftdi:///?')
 		pyautogui.write("Ftdi().open_from_url('ftdi:///?')")
-	
-		# python3 
+
+		# python3
 		check_call("python3", shell=True)
 
 		# import os
 		pyautogui.write("import os")
 
 		# os.environ["BLINKA_FT232H"]
+		command = 'os.environ["BLINKA_FT232H"]'
+		pyautogui.write(command)
+
 		# import digitialio
+		pyautogui.write("import digitalio")
+
 
 	def toggleHDMIport():
 		"""
 		Cycle through HDMI inputs connected, skipping any port not input video into switcher
 		Using FT232H from Adafruit to simulate human button press of 1.5 seconds 
 		on ASIN B0739GSKV2 HDMI switcher from Amazon
-		
+
 		Key argument(s):
 		NONE
 
@@ -136,13 +141,13 @@ class Driver(object):
 		successfullSwitch = False
 		led = digitalio.DigitalInOut(board.D7)
 		led = led.direction = digitalio.Direction.OUTPUT
-		
+
 		led.value = False
 		time.sleep(1.5)
 		led.value = True
-		
+
 		successfullSwitch = True
-		
+
 		return successfullSwitch
 
 
